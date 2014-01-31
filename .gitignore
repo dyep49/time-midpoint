@@ -15,4 +15,4 @@
 /tmp
 
 # Ignore database yaml file
-/config/application.rb
+/config/database.yml
