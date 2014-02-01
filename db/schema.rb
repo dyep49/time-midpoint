@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140201174445) do
+ActiveRecord::Schema.define(:version => 20140201183134) do
 
   create_table "locations", :force => true do |t|
     t.float    "long"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20140201174445) do
     t.string   "tag"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "address"
   end
 
   create_table "users", :force => true do |t|
