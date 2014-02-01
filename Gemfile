@@ -9,6 +9,8 @@ gem 'pg'
 
 gem 'pry'
 gem 'pry-rails'
+gem 'geocoder'
+gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.
