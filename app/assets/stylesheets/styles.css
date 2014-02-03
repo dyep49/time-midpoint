@@ -1,24 +1,42 @@
-.row {
-	margin: 0px;
-	padding: 0px;
-}
-
 header {
-	background-color: grey;
+	min-height: 100px;
+	padding: 20px;
+	background-color: #7E8AA2;
+	opacity: 0.9;
 }
 
-.container {
-	background-color: lightblue;
+#user-info {
+	float: right;
+
+}
+
+div .center {
+	text-align: center;
+}
+
+.transparent {
+	background-color: rgba(200, 200, 200, 0.7);
+	min-height: 100%;
+	min-width: 100%;
+	position: absolute;
+}
+
+#landing-background {
+	background: url(nyvintage.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .btn {
-	background-color: #8AA8B0;
+	background-color: #FF9800;
 	border: none;
-	border-color: #DEDEDE;
+	opacity: 0.8;
 	margin-bottom: 5px;
-	width: 200px;
 }
 
 .btn:hover {
-	background-color: #DEDEDE; 
+	background-color: #FF9800;
+	opacity: 1;
 }
