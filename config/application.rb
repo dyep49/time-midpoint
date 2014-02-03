@@ -1,5 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
+# allows rake spec to work
+#require 'rspec/rails'
+
 # Pick the frameworks you want:
 require "active_record/railtie"
 require "action_controller/railtie"
