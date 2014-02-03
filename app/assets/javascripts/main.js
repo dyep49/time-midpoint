@@ -65,9 +65,11 @@ YELP = function(ll, category) {
 
 var map = map || {
     render: function() {
+        var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
+        var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 8
+            center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
+            zoom: 12
         };
         var map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
@@ -114,5 +116,5 @@ var app = app || {
 
 $(function() {
     app.initialize();
-//    map.render();
+    map.render();
 });
