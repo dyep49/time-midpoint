@@ -7,6 +7,10 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 
+gem 'pry'
+gem 'pry-rails'
+gem 'geocoder'
+gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,6 +22,12 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
 end
 
 gem 'jquery-rails'
