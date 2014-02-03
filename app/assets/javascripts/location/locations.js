@@ -1,5 +1,7 @@
 var app = app || {
     initialize: function() {
+        app.locations = [];
+        app.views = [];
         app.constants = {
             // Designated the maximum amount of locations that
             //can be added for midpoint calculation  (excluding user's location)
@@ -14,6 +16,7 @@ var app = app || {
     },
 
     addEventListeners: function() {
+        // Adds a new location input box
         app.elements.$add_location_btn.on("click", function(e) {
             e.preventDefault(); // prevent page from refreshing and such
             var number_of_inputs = app.elements.$non_user_location_inputs.children().length;

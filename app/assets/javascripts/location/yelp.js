@@ -54,7 +54,10 @@ YELP = function(ll, category) {
             'dataType': 'jsonp',
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
-                console.log(data);
+                // console.log( data.region );
+                data.businesses.forEach(function(business) {
+                    var location_view = new LocationView( business );
+                });
             }
         });
     };
