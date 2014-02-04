@@ -26,7 +26,7 @@
       var map = new google.maps.Map(map_div, mapOptions);
 
       var coordinates = [[]];
-      var minutes = 0;        
+      var minutes = 5;        
 
       var mapnificent, urbanDistance, positions = {};
 
@@ -40,18 +40,21 @@
           latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
           latlng_array.push(latlng);
         });
-        console.log(latlng_array)
+        console.log(latlng_array);
       };
 
 
 
       function initialize(){
+        var i = 0
+
+
         var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
           that.bind("setup", function(){
           	var intersect = that.getOption("intersect");
           	that.setOption("intersection", true);
             console.log("setup complete");
-            alert(minutes);
+            alert("Testing" + minutes + "minutes");
           });
 
           that.bind("loadProgress", function(progress){
@@ -113,8 +116,18 @@
 
           var getBlobs = function(){
             var blobs = that.search.detectBlobs();
-            console.log(blobs);
+            // console.log(blobs);
+            i += 1;
             coordinates.push(blobs);
+            if (i == 2) {
+              get_coordinates();
+              if (latlng_array.length === 0){
+                minutes +=5;
+                mapnificent.destroy();
+                $('iframe').remove();
+                initialize();
+              };
+            };
           };
         };
       if(typeof Mapnificent !== "undefined" && Mapnificent.isBrowserSupported())
@@ -137,9 +150,7 @@
 
  
     $(document).ready(function(){
-        minutes += 5;
-        initialize();
-        get_coordinates();
+      initialize();
     });
 
 
