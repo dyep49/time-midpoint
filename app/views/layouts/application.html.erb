@@ -5,9 +5,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCKQ1sBI9xkbkB4KxF8tuoIoHAhmEzhCAg&sensor=false"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-    <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <%if current_page?('/landing')%>
@@ -24,11 +22,14 @@
           </div>
         </header>
       <% end %>
-      
         <div class="row">
           <%= yield %>
         </div>
       </div>
     </div>
   </body>
+    <%= javascript_include_tag "application" %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
+
 </html>

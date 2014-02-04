@@ -1,51 +1,49 @@
-$(function() {
-
-	var map_div = $('#mapnificent-map')[0];
+  var map_div = $('#map')[0];
       
-  var mapOptions = {
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    zoom: 12,
-    center: new google.maps.LatLng(40.7577, -73.9857)
-  };
+      var mapOptions = {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoom: 12,
+        center: new google.maps.LatLng(40.7577, -73.9857)
+      };
       
-  var map = new google.maps.Map(map_div, mapOptions);
+      var map = new google.maps.Map(map_div, mapOptions);
 
-  var coordinates = [[]];
-  var minutes = 10;        
+      var coordinates = [[]];
+      var minutes = 10;        
 
-  var mapnificent, urbanDistance, positions = {};
+      var mapnificent, urbanDistance, positions = {};
 
-  var latlng_array = []
+      var latlng_array = []
 
-  var get_coordinates = function(){
-    var coordinate_array = coordinates[coordinates.length-1]
-    $.each(coordinate_array, function(index, coordinates){
-      var midx = coordinates.midx;
-      var midy = coordinates.midy;
-      var sqkm = coordinates.sqkm;
-      latlng = mapnificent.getLatLngFromCanvasXY(midx, midy)
-      latlng.sqkm = sqkm;
-      latlng_array.push(latlng);
-    });
-    console.log(latlng_array);
-  };
+      var get_coordinates = function(){
+        var coordinate_array = coordinates[coordinates.length-1]
+        $.each(coordinate_array, function(index, coordinates){
+          var midx = coordinates.midx;
+          var midy = coordinates.midy;
+          var sqkm = coordinates.sqkm;
+          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy)
+          latlng.sqkm = sqkm;
+          latlng_array.push(latlng);
+        });
+        console.log(latlng_array);
+      };
 
-  function get_midpoint(){
-    largest_blob = ''
-    $.each(latlng_array, function(index, latlng){
-      if (largest_blob.length === 0)
-        {
-          largest_blob = latlng;
-        } 
-      else if (latlng.sqkm > largest_blob.sqkm) 
-        {
-          largest_blob = latlng;
-        }
-      else {};
-    });
-    console.log(largest_blob);
-    return largest_blob;
-  	};
+      function get_midpoint(){
+        largest_blob = ''
+        $.each(latlng_array, function(index, latlng){
+          if (largest_blob.length === 0)
+            {
+              largest_blob = latlng;
+            } 
+          else if (latlng.sqkm > largest_blob.sqkm) 
+            {
+              largest_blob = latlng;
+            }
+          else {};
+        });
+        console.log(largest_blob);
+        return largest_blob;
+      };
 
 
 
@@ -153,10 +151,33 @@ $(function() {
 
  
     $(document).ready(function(){
+    		var button = $('#search-midpoint');
+				var userLocation = $("#user-location");
+				var friendLocation = $("#friend-location");
+				var userCoordinate = {};
+				var friendCoordinate = {};
+				$(userLocation).geocomplete().bind("geocode:result", function(event, result){
+					var latitude = result.geometry.location.d;
+					var longitude = result.geometry.location.e;
+			    	var locationInput = {};
+			    	userCoordinate.latitude = latitude;
+			    	userCoordinate.longitude = longitude;
+			    	console.log(userCoordinate);
+			  });
+				$(friendLocation).geocomplete().bind("geocode:result", function(event, result){
+					var latitude = result.geometry.location.d;
+					var longitude = result.geometry.location.e;
+					friendCoordinate.latitude = latitude;
+					friendCoordinate.longitude = longitude;
+					console.log(friendCoordinate);
+  });
+
+	submit_stuff = {};
+	submit_stuff.user = userCoordinate;
+	submit_stuff.friend = friendCoordinate;
       initialize();
     });
-
-	//MAPNIFICENT
+	// MAPNIFICENT
 
 	var button = $('#search-midpoint');
 	var userLocation = $("#user-location");
@@ -182,5 +203,5 @@ $(function() {
 	submit_stuff = {};
 	submit_stuff.user = userCoordinate;
 	submit_stuff.friend = friendCoordinate;
-});
+
 
