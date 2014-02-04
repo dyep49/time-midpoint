@@ -55,7 +55,6 @@ YELP = function(ll, category) {
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
                 data.businesses.forEach(function(business) {
-
                     // we do this because the yelp id is not the id we want to use
                     // in the Location constructor
                     delete business["id"];
@@ -80,10 +79,12 @@ var map = map || {
         var marker, i;
 
         for ( i = 0; i < app.locations.length; i++ ) {
-            var latitude = app.locations[i].latitude;
-            var longitude = app.locations[i].longitude;
+            var latitude = app.locations[i].lat;
+            var longitude = app.locations[i].lng;
+
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
+                animation: google.maps.Animation.DROP,
                 map: map
             });
         }
