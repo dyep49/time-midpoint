@@ -141,14 +141,15 @@ var Map = function() {
 
             console.log(marker.infowindow);
 
-            $("body").on("click", function() {
-                marker.infowindow.close();
-                $("body").unbind( "click" );
-            });
-
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow.open( google_map, marker );
             });
+
+
+            google.maps.event.addListener(google_map, 'click', function() {
+                infowindow.close();
+            });
+
         });
     };
 
