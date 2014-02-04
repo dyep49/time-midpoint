@@ -26,7 +26,7 @@ YELP = function(ll, category) {
 
     var parameters = [];
     parameters.push(['term', category]);
-    parameters.push(['limit', "10"] );
+    parameters.push(['limit', "5"] );
     parameters.push( ["ll", ll] ) ;
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -81,17 +81,18 @@ var map = map || {
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
         map.renderMarkers();
+        map.renderInfoWindows();
     },
     renderMarkers: function() {
         function addMarker() {
             var latitude = app.locations[iterator].lat;
             var longitude = app.locations[iterator].lng;
 
-            new google.maps.Marker({
+            app.markers.push(new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
                 animation: google.maps.Animation.DROP
-            });
+            }));
             iterator++;
         }
 
@@ -100,6 +101,14 @@ var map = map || {
                 addMarker();
             }, i * 300);
         }
+    },
+
+    renderInfoWindows: function() {
+        app.markers.forEach(function(marker) {
+            google.maps.event.addListener(marker, 'click', function() {
+                console.log("hello world");
+            });
+        });
     }
 };
 
@@ -107,6 +116,7 @@ var app = app || {
     initialize: function() {
         app.locations = [];
         app.views = [];
+        app.markers = [];
         app.constants = {
             // designated the maximum amount of locations that
             //can be added for midpoint calculation  (excluding user's location)
@@ -141,5 +151,5 @@ var app = app || {
 
 $(function() {
     app.initialize();
-//    YELP();
+
 });
