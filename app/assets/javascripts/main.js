@@ -54,9 +54,13 @@ YELP = function(ll, category) {
             'dataType': 'jsonp',
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
-                console.log( data );
                 data.businesses.forEach(function(business) {
-                    var location_view = new LocationView( business );
+
+                    // we do this because the yelp id is not the id we want to use
+                    // in the Location constructor
+                    delete business["id"];
+                    //var location_view = new LocationView( business );
+                    new Location(business);
                 });
             }
         });
