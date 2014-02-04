@@ -6,7 +6,7 @@ function fetchAllYelpLocations(){
         success: function(data){
             var location_array = data;
             location_array.forEach(function(location){
-                var new_location = new Location(location);
+                var new_location = new YelpLocation(location);
             });
         }
     });
@@ -37,10 +37,13 @@ var YelpLocation = function(object){
     self.create = function(){
         var params = {
             location: {
-                "tag": self.tag,
+                
                 "address": self.address,
                 "long": self.lng,
-                "lat": self.lat
+                "lat": self.lat,
+                "name": self.name,
+                "image_url": self.image_url,
+                "rating": self.rating
             }
         };
         $.ajax({

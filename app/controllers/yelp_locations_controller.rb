@@ -2,6 +2,7 @@ class YelpLocationsController < ApplicationController
 
   def index
     #get
+  
       respond_to do |format|
       puts params
       format.html { @locations = YelpLocation.all }
@@ -10,7 +11,7 @@ class YelpLocationsController < ApplicationController
   end 
 
   def create
-    
+     
      location = YelpLocation.create(params[:location])
        render json: location
   end 
