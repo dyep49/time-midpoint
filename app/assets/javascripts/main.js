@@ -66,40 +66,40 @@ YELP = function(ll, category) {
     };
 }( getMidpointCoords(), getCategory() );
 
+var google_map;
+var iterator = 0;
+
 var map = map || {
-    render: function() {
+    renderMap: function() {
         var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
         var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
             zoom: 12
         };
-        var map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+        google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+        app.elements.$results_map_div.css("height", "500px");
+    },
+    renderMarkers: function() {
+        function addMarker() {
+            var latitude = app.locations[iterator].lat;
+            var longitude = app.locations[iterator].lng;
 
+            new google.maps.Marker({
+                position: new google.maps.LatLng( latitude, longitude ),
+                map: google_map,
+                animation: google.maps.Animation.DROP
+            });
+
+            iterator++;
+        }
 
         for ( var i = 0; i < app.locations.length; i++ ) {
-            var latitude = app.locations[i].lat;
-            var longitude = app.locations[i].lng;
-
-            //setTimeout(function() {
-                createMarker(latitude, longitude);
-//            }, i * 200);
+            setTimeout(function() {
+                addMarker();
+            }, i * 300);
         }
-
-
-        function createMarker(latitude, longitude) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng( latitude, longitude ),
-                animation: google.maps.Animation.DROP,
-                map: map
-            });
-        }
-
-
-        app.elements.$results_map_div.css("height", "500px");
     }
-
-
 };
 
 var app = app || {
@@ -140,6 +140,6 @@ var app = app || {
 
 $(function() {
     app.initialize();
-//    YELP();
-//    map.render();
+    //    YELP();
+    //    map.render();
 });
