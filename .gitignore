@@ -16,3 +16,6 @@
 # Ignore database yaml file
 /config/database.yml
 /scratch/notes
+
+# Ignore Jonathan's google API Key
+/config/initializers/google.rb
