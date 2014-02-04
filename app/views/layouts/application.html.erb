@@ -2,14 +2,13 @@
 <html>
   <head>
     <title>TimeMidpoint</title>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_KEY %>&sensor=false"> </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=GOOGLE_KEY%>&sensor=false"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-<<<<<<< HEAD
   <body id="landing-background">
     <div class="transparent">
       <% if user_signed_in? %>
@@ -20,20 +19,6 @@
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
       </header>
-=======
-  <body>
-    <header>
-    </header>
-    <div class="container">
-      <%= yield %>
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path %> |
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= button_to "Register", new_user_registration_path, :class => "btn btn-primary btn-lg", :method => "get" %>
-        <%= button_to "Sign in", new_user_session_path, :class => "btn btn-primary btn-sm" %>
->>>>>>> 409247192dafc9b7c0cf147a94f024930809573b
       <% end %>
         <div class="container">
         <div class="row">
