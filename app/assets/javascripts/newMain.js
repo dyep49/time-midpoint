@@ -1,17 +1,17 @@
 $(function() {
 
 	var map_div = $('#mapnificent-map')[0];
-      
+
   var mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     zoom: 12,
     center: new google.maps.LatLng(40.7577, -73.9857)
   };
-      
+
   var map = new google.maps.Map(map_div, mapOptions);
 
   var coordinates = [[]];
-  var minutes = 10;        
+  var minutes = 10;
 
   var mapnificent, urbanDistance, positions = {};
 
@@ -36,8 +36,8 @@ $(function() {
       if (largest_blob.length === 0)
         {
           largest_blob = latlng;
-        } 
-      else if (latlng.sqkm > largest_blob.sqkm) 
+        }
+      else if (latlng.sqkm > largest_blob.sqkm)
         {
           largest_blob = latlng;
         }
@@ -151,7 +151,7 @@ $(function() {
       };
     };
 
- 
+
     $(document).ready(function(){
       initialize();
     });
@@ -183,4 +183,3 @@ $(function() {
 	submit_stuff.user = userCoordinate;
 	submit_stuff.friend = friendCoordinate;
 });
-

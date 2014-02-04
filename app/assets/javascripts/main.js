@@ -61,6 +61,8 @@ YELP = function(ll, category) {
                     //var location_view = new LocationView( business );
                     new YelpLocation(business);
                 });
+                // KILL THE MAGNIFICENT MAP
+                // $("#mapnificent-map").remove();
                 var map = new Map();
                 map.initialize();
             }
@@ -73,7 +75,6 @@ var iterator = 0;
 
 var Map = function() {
     var self = this;
-
     this.marker_drop_lag = 300;
 
     this.initialize = function() {
@@ -104,11 +105,24 @@ var Map = function() {
             var latitude = app.locations[iterator].lat;
             var longitude = app.locations[iterator].lng;
 
-            app.markers.push(new google.maps.Marker({
+            var new_marker = new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
                 animation: google.maps.Animation.DROP
-            }));
+            });
+
+            var content_string = [
+                "<div>",
+                "<h3>",
+                app.locations[iterator].name,
+                "</h3>",
+                "</div>"
+
+            ];
+
+            new_marker.custom_infowindow_text = content_string.join("");
+
+            app.markers.push( new_marker );
             iterator++;
         }
 
@@ -121,11 +135,23 @@ var Map = function() {
 
     this.renderInfoWindows = function() {
         app.markers.forEach(function(marker) {
+            var infowindow = new google.maps.InfoWindow({
+                content: marker.custom_infowindow_text
+            });
+
+            console.log(marker.infowindow);
+
+            $("body").on("click", function() {
+                marker.infowindow.close();
+                $("body").unbind( "click" );
+            });
+
             google.maps.event.addListener(marker, 'click', function() {
-                console.log("hello world");
+                infowindow.open( google_map, marker );
             });
         });
     };
+
 };
 
 var app = app || {
