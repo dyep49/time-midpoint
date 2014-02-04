@@ -1,0 +1,157 @@
+ <!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Mapnificent - API Example</title>
+    <meta name="robots" content="index, follow" />
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+    <body>
+      <div id="map" style="width:500px;height:400px;"></div>
+      <div id="loading"></div>
+      <div id="copyright"></div>
+      <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      //Instantiate map and pass it a div an options
+
+      var map_div = $('#map')[0];
+      
+      var mapOptions = {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoom: 12,
+        center: new google.maps.LatLng(40.7577, -73.9857)
+      };
+      
+      var map = new google.maps.Map(map_div, mapOptions);
+
+      var coordinates = [[]];
+      var minutes = 10;        
+
+      var mapnificent, urbanDistance, positions = {};
+
+      // function get_coordinates(){
+      //   coordinate_array = coordinates[coordinates.length-1]
+      //   latlng_array = []
+      //   $.each(coordinate_array, function(index, coordinates){
+      //     var midx = coordinates.midx;
+      //     var midy = coordinates.midy;
+      //     latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
+      //     latlng_array.push(latlng);
+      //   });
+      //   alert("working");
+      //   console.log(latlng_array);
+      // };
+
+      function initialize(callback){
+        var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
+          that.bind("setup", function(){
+          	var intersect = that.getOption("intersect");
+          	that.setOption("intersection", true);
+            console.log("setup complete");
+          });
+
+          that.bind("loadProgress", function(progress){
+            $('#loading').text(progress);
+            if(progress >= 100){
+              $('#loading').text("Almost done...");
+            }
+          });
+
+          that.bind("dataLoaded", function(){
+
+          	//Times Square
+            var geopos = {lat: 40.7577, lng: -73.9857};
+            var time = minutes *60;
+            var pos = that.addPosition(geopos, time);
+
+            // 55th and 5th ave
+            var geopos_2 = {lat: 40.7618, lng: -73.9754};
+            var time_2 = minutes *60;
+            var pos_2 = that.addPosition(geopos_2, time_2);
+
+
+            // 7th st and Ave B
+            // var geopos_3 = {lat: 40.724788, lng: -73.980721};
+            // var time_3 = 30*60;
+            // var pos_3 = that.addPosition(geopos_3, time_3);
+
+            positions[pos.index] = {position: pos, latlng: geopos};
+            positions[pos_2.index] = {position: pos_2, latlng: geopos_2};
+            // positions[pos_3.index] = {position: pos_3, latlng: geopos_3};
+
+            pos.startCalculation();
+            pos_2.startCalculation();
+            // pos_3.startCalculation();
+          });
+
+          that.bind("calculationStarted", function(position){
+            $('#loading').text("Starting calculation: 0.0%");
+          });
+
+          that.bind("calculationUpdated", function(position){
+            var percent = position.calculationProgress /
+              that.getOption("estimatedMaxCalculateCalls") * 100;
+            $('#loading').text("Calculating: "+percent+"%");
+          });
+
+          that.bind("calculationDone", function(position){
+            $('#loading').text("Calculation Done!");
+            console.log("calc finished")
+            mapnificent.trigger('redraw');
+            getBlobs();
+            callback();
+          });
+
+          var getBlobs = function(){
+            var blobs = that.search.detectBlobs();
+            console.log(blobs);
+            coordinates.push(blobs);
+          };
+        };
+      if(typeof Mapnificent !== "undefined" && Mapnificent.isBrowserSupported())
+        {
+        Mapnificent.forCoordinates({lat:40.7577,lng:-73.9857}, function(options){
+          if(options == null){
+            return;
+          }
+
+          mapnificent = Mapnificent(options);
+          mapnificent.addLayer("urbanDistance", UrbanDistanceUI);
+          mapnificent.bind("initDone", function(){
+          	// mapnificent.hide();
+          });
+
+          mapnificent.addToMap(map);
+        });
+      };
+    };
+
+ 
+    $(document).ready(function(){
+      initialize(function(){
+        coordinate_array = coordinates[coordinates.length-1]
+        latlng_array = []
+        $.each(coordinate_array, function(index, coordinates){
+          var midx = coordinates.midx;
+          var midy = coordinates.midy;
+          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
+          latlng_array.push(latlng);
+        });
+        console.log(latlng_array)
+      });
+    });
+
+
+
+
+
+			
+			
+
+    </script>
+   
+  </body>
+</html>    
+
+
