@@ -12,19 +12,19 @@
   <body id="landing-background">
     <div class="transparent">
       <% if user_signed_in? %>
-      <header>
-        <div id="user-info">
-          <p>Hi <strong><%= current_user.first_name%></strong>.</p>
-          <%= link_to 'Edit profile', edit_user_registration_path %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-        </div>
-      </header>
+        <header>
+          <div id="user-info">
+            <p>Hi <strong><%= current_user.first_name%></strong>.</p>
+            <%= link_to 'Edit profile', edit_user_registration_path %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          </div>
+        </header>
       <% end %>
-        <div class="container">
+      <div class="container">
         <div class="row">
-      <%= yield %>
+          <%= yield %>
         </div>
-        </div>
+      </div>
     </div>
   </body>
 </html>

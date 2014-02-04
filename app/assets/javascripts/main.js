@@ -127,5 +127,5 @@ var app = app || {
 $(function() {
     app.initialize();
     YELP();
-    map.render();
+//    map.render();
 });
