@@ -76,8 +76,6 @@ var map = map || {
     }
 };
 
-
-
 var app = app || {
     initialize: function() {
         app.locations = [];
@@ -116,5 +114,5 @@ var app = app || {
 
 $(function() {
     app.initialize();
-    map.render();
+//    map.render();
 });
