@@ -61,7 +61,8 @@ YELP = function(ll, category) {
                     //var location_view = new LocationView( business );
                     new Location(business);
                 });
-                map.renderMap();
+                var map = new Map();
+                map.initialize();
             }
         });
     };
@@ -70,8 +71,16 @@ YELP = function(ll, category) {
 var google_map;
 var iterator = 0;
 
-var map = map || {
-    renderMap: function() {
+var Map = function() {
+    var self = this;
+
+    this.initialize = function() {
+        self.renderMap();
+        self.renderMarkers();
+        self.renderInfoWindows();
+    };
+
+    this.renderMap = function() {
         var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
         var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
@@ -80,10 +89,9 @@ var map = map || {
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
-        map.renderMarkers();
-        map.renderInfoWindows();
-    },
-    renderMarkers: function() {
+    };
+
+    this.renderMarkers = function() {
         function addMarker() {
             var latitude = app.locations[iterator].lat;
             var longitude = app.locations[iterator].lng;
@@ -101,15 +109,15 @@ var map = map || {
                 addMarker();
             }, i * 300);
         }
-    },
+    };
 
-    renderInfoWindows: function() {
+    this.renderInfoWindows = function() {
         app.markers.forEach(function(marker) {
             google.maps.event.addListener(marker, 'click', function() {
                 console.log("hello world");
             });
         });
-    }
+    };
 };
 
 var app = app || {
