@@ -21,7 +21,7 @@ div .center {
 	position: absolute;
 }
 
-#landing-background {
+.landing-background {
 	background: url(nyvintage.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -68,4 +68,8 @@ div .center {
 
 .submit-button {
 	margin-top: 5px;
+}
+
+#logo {
+	margin-bottom: 100px;
 }
