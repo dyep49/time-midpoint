@@ -33,7 +33,7 @@
       var latlng_array = []
 
       var get_coordinates = function(){
-        coordinate_array = coordinates[coordinates.length-1]
+        var coordinate_array = coordinates[coordinates.length-1]
         $.each(coordinate_array, function(index, coordinates){
           var midx = coordinates.midx;
           var midy = coordinates.midy;
@@ -59,6 +59,7 @@
           else {};
         });
         console.log(largest_blob);
+        return largest_blob;
       };
 
 
