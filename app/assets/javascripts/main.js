@@ -130,6 +130,6 @@ var app = app || {
 
 $(function() {
     app.initialize();
-    YELP();
+//    YELP();
 //    map.render();
 });
