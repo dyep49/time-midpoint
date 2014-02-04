@@ -26,7 +26,7 @@ YELP = function(ll, category) {
 
     var parameters = [];
     parameters.push(['term', category]);
-    parameters.push(['limit', "10"] );
+    parameters.push(['limit', "5"] );
     parameters.push( ["ll", ll] ) ;
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -55,40 +55,60 @@ YELP = function(ll, category) {
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
                 data.businesses.forEach(function(business) {
-
                     // we do this because the yelp id is not the id we want to use
                     // in the Location constructor
                     delete business["id"];
                     //var location_view = new LocationView( business );
                     new Location(business);
                 });
+                map.renderMap();
             }
         });
     };
 }( getMidpointCoords(), getCategory() );
 
+var google_map;
+var iterator = 0;
+
 var map = map || {
-    render: function() {
+    renderMap: function() {
         var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
         var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
             zoom: 12
         };
-        var map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+        google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+        app.elements.$results_map_div.css("height", "500px");
+        map.renderMarkers();
+        map.renderInfoWindows();
+    },
+    renderMarkers: function() {
+        function addMarker() {
+            var latitude = app.locations[iterator].lat;
+            var longitude = app.locations[iterator].lng;
 
-        var marker, i;
-
-        for ( i = 0; i < app.locations.length; i++ ) {
-            var latitude = app.locations[i].latitude;
-            var longitude = app.locations[i].longitude;
-            marker = new google.maps.Marker({
+            app.markers.push(new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
-                map: map
-            });
+                map: google_map,
+                animation: google.maps.Animation.DROP
+            }));
+            iterator++;
         }
 
-        app.elements.$results_map_div.css("height", "500px");
+        for ( var i = 0; i < app.locations.length; i++ ) {
+            setTimeout(function() {
+                addMarker();
+            }, i * 300);
+        }
+    },
+
+    renderInfoWindows: function() {
+        app.markers.forEach(function(marker) {
+            google.maps.event.addListener(marker, 'click', function() {
+                console.log("hello world");
+            });
+        });
     }
 };
 
@@ -96,8 +116,9 @@ var app = app || {
     initialize: function() {
         app.locations = [];
         app.views = [];
+        app.markers = [];
         app.constants = {
-            // Designated the maximum amount of locations that
+            // designated the maximum amount of locations that
             //can be added for midpoint calculation  (excluding user's location)
             MAX_LOCATION_INPUTS: 2
         };
@@ -130,6 +151,5 @@ var app = app || {
 
 $(function() {
     app.initialize();
-    YELP();
-//    map.render();
+
 });

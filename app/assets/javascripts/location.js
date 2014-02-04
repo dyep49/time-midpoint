@@ -4,7 +4,6 @@ function fetchAllLocations(){
         type: "get",
         dataType: "json",
         success: function(data){
-            console.log(data);
             var location_array = data;
             location_array.forEach(function(location){
                 var new_location = new Location(location);
@@ -20,7 +19,6 @@ var Location = function(object){
     this.tag = object.tag || null;
     this.address = object.address || object.location.display_address.join(" ");
     this.id = object.id || null;
-    this.category = object.category || object.categories[0][0];
     this.distance_from_mid_meters = object.distance || null;
     this.rating = object.rating || null;
     this.image_url = object.image_url || null;
