@@ -11,6 +11,7 @@
   </head>
   <body id="landing-background">
     <div class="transparent">
+      <div class="container">
       <% if user_signed_in? %>
         <header>
           <div id="user-info">
@@ -20,7 +21,7 @@
           </div>
         </header>
       <% end %>
-      <div class="container">
+      
         <div class="row">
           <%= yield %>
         </div>
