@@ -26,18 +26,35 @@
       var map = new google.maps.Map(map_div, mapOptions);
 
       var coordinates = [[]];
-      var minutes = 1;        
+      var minutes = 5;        
 
       var mapnificent, urbanDistance, positions = {};
 
+      var latlng_array = []
+
+      var get_coordinates = function(){
+        coordinate_array = coordinates[coordinates.length-1]
+        $.each(coordinate_array, function(index, coordinates){
+          var midx = coordinates.midx;
+          var midy = coordinates.midy;
+          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
+          latlng_array.push(latlng);
+        });
+        console.log(latlng_array);
+      };
 
 
-      function initialize(callback){
+
+      function initialize(){
+        var i = 0
+
+
         var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
           that.bind("setup", function(){
           	var intersect = that.getOption("intersect");
           	that.setOption("intersection", true);
             console.log("setup complete");
+            alert("Testing" + minutes + "minutes");
           });
 
           that.bind("loadProgress", function(progress){
@@ -95,13 +112,22 @@
             console.log("calc finished")
             mapnificent.trigger('redraw');
             getBlobs();
-            callback();
           });
 
           var getBlobs = function(){
             var blobs = that.search.detectBlobs();
-            console.log(blobs);
+            // console.log(blobs);
+            i += 1;
             coordinates.push(blobs);
+            if (i == 2) {
+              get_coordinates();
+              if (latlng_array.length === 0){
+                minutes +=5;
+                mapnificent.destroy();
+                $('iframe').remove();
+                initialize();
+              };
+            };
           };
         };
       if(typeof Mapnificent !== "undefined" && Mapnificent.isBrowserSupported())
@@ -124,35 +150,7 @@
 
  
     $(document).ready(function(){
-
-      var get_coordinates = function(){
-        coordinate_array = coordinates[coordinates.length-1]
-        latlng_array = []
-        $.each(coordinate_array, function(index, coordinates){
-          var midx = coordinates.midx;
-          var midy = coordinates.midy;
-          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
-          latlng_array.push(latlng);
-        });
-        console.log(latlng_array)
-        for (var i = 0; i < 10; i++) {
-          if (latlng_array.length === 0) {
-            console.log(i);
-            mapnificent.destroy();
-            $('iframe').remove()
-            minutes +=5;
-            initialize(function(){
-              get_coordinates();
-            });
-          } else {
-            break;
-          }
-        };
-      };
-
-      initialize(function(){
-        get_coordinates();
-      });
+      initialize();
     });
 
 
