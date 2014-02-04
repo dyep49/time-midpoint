@@ -1,6 +1,3 @@
-array = []
-
-
 function fetchAllLocations(){
     $.ajax({
         url: "/locations",
@@ -10,18 +7,23 @@ function fetchAllLocations(){
             console.log(data);
             var location_array = data;
             location_array.forEach(function(location){
-                var new_location = new Location(location.lat, location.lng, location.tag, location.id)
-            })
+                var new_location = new Location(location);
+            });
         }
-    })
+    });
 };
 
 
-var Location = function(tag, address, id){
+var Location = function(object){
     var self = this;
-    self.tag = tag;
-    self.address = address;
-    self.id = id;
+    this.name = object.name || null;
+    this.tag = object.tag || null;
+    this.address = object.address || object.location.display_address.join(" ");
+    this.id = object.id || null;
+    this.category = object.category || object.categories[0][0];
+    this.distance_from_mid_meters = object.distance || null;
+    this.rating = object.rating || null;
+    this.image_url = object.image_url || null;
 
     this.geocode = function() {
         var geocoder = new google.maps.Geocoder();
@@ -40,9 +42,9 @@ var Location = function(tag, address, id){
                 "tag": self.tag,
                 "address": self.address,
                 "long": self.lng,
-                "lat": self.lat,
+                "lat": self.lat
             }
-        }
+        };
         $.ajax({
             url: "/locations",
             data: params,
@@ -50,21 +52,21 @@ var Location = function(tag, address, id){
             dataType: "json",
             success: function(data){
                 console.log(data);
-                self.id = data.id
+                self.id = data.id;
             }
-        })
-    }
+        });
+    };
     self.destroy = function(){
         $.ajax({
             url: "/locations/"+ this.id,
             type: "delete",
             dataType: "json",
             success: function(data){
-                var deleted_locations = data
-                array = array.splice(deleted_locations, 1)
+                var deleted_locations = data;
+                app.locations = app.locations.splice(deleted_locations, 1);
             }
-        })
+        });
 
-    }
-    array.push(self);
+    };
+    app.locations.push(self);
 };
