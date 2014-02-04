@@ -1,68 +1,72 @@
-array = []
-
-
 function fetchAllLocations(){
-  $.ajax({
-    url: "/locations",
-    type: "get",
-    dataType: "json",
-    success: function(data){
-      console.log(data);
-      var location_array = data;
-      location_array.forEach(function(location){
-        var new_location = new Location(location.lat, location.lng, location.tag, location.id)
-      })
-    }
-  })
+    $.ajax({
+        url: "/locations",
+        type: "get",
+        dataType: "json",
+        success: function(data){
+            console.log(data);
+            var location_array = data;
+            location_array.forEach(function(location){
+                var new_location = new Location(location);
+            });
+        }
+    });
 };
 
 
-var Location = function(tag, address, lat, lng, id){
-  var self = this;
-  self.lat = lat;
-  self.lng = lng;
-  self.tag = tag;
-  self.address = address;
-  self.id = id;
+var Location = function(object){
+    var self = this;
+    this.name = object.name || null;
+    this.tag = object.tag || null;
+    this.address = object.address || object.location.display_address.join(" ");
+    this.id = object.id || null;
+    this.category = object.category || object.categories[0][0];
+    this.distance_from_mid_meters = object.distance || null;
+    this.rating = object.rating || null;
+    this.image_url = object.image_url || null;
 
-self.create = function(){
-  var params = {
-    location: {
-      "tag": self.tag,
-      "address": self.address,
-      "long": self.lng,
-      "lat": self.lat,
-    }
-  }
-    $.ajax({
-      url: "/locations",
-      data: params,
-      type: "post",
-      dataType: "json",
-      success: function(data){
-        console.log(data);
-        self.id = data.id
-      }
-    })
-  }
-  self.destroy = function(){
-    $.ajax({
-      url: "/locations/"+ this.id,
-      type: "delete",
-      dataType: "json",
-      success: function(data){
-        var deleted_locations = data
-        array = array.splice(deleted_locations, 1)
-      }
-    })
+    this.geocode = function() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': self.address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                self.lat = results[0].geometry.location.lat();
+                self.lng = results[0].geometry.location.lng();
+            }
+        });
+    };
+    this.geocode();
 
-  }
-  array.push(self);
+    self.create = function(){
+        var params = {
+            location: {
+                "tag": self.tag,
+                "address": self.address,
+                "long": self.lng,
+                "lat": self.lat
+            }
+        };
+        $.ajax({
+            url: "/locations",
+            data: params,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+                self.id = data.id;
+            }
+        });
+    };
+    self.destroy = function(){
+        $.ajax({
+            url: "/locations/"+ this.id,
+            type: "delete",
+            dataType: "json",
+            success: function(data){
+                var deleted_locations = data;
+                app.locations = app.locations.splice(deleted_locations, 1);
+            }
+        });
+
+    };
+    app.locations.push(self);
 };
-
-
-
-
-
-
-
