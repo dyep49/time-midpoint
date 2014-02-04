@@ -9,8 +9,10 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-  <body id="landing-background">
-    <div class="transparent">
+  <%if current_page?('/landing')%>
+  <body class='<%="landing-background"%>'>
+    <div class='<%="transparent"%>'>
+    <%end%>
       <div class="container">
       <% if user_signed_in? %>
         <header>
