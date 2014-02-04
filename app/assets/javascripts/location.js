@@ -16,13 +16,25 @@ function fetchAllLocations(){
 };
 
 
-var Location = function(tag, address, lat, lng, id){
+var Location = function(tag, address, id){
   var self = this;
-  self.lat = lat;
-  self.lng = lng;
   self.tag = tag;
   self.address = address;
+  self.lng; 
+  self.lat;
   self.id = id;
+
+
+    this.geocode = function() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': self.address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                self.lat = results[0].geometry.location.lat();
+                self.lng = results[0].geometry.location.lng();
+            }
+        });
+      };
+      this.geocode();
 
 self.create = function(){
   var params = {
