@@ -26,7 +26,7 @@
       var map = new google.maps.Map(map_div, mapOptions);
 
       var coordinates = [[]];
-      var minutes = 5;        
+      var minutes = 10;        
 
       var mapnificent, urbanDistance, positions = {};
 
@@ -37,10 +37,28 @@
         $.each(coordinate_array, function(index, coordinates){
           var midx = coordinates.midx;
           var midy = coordinates.midy;
-          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy);
+          var sqkm = coordinates.sqkm;
+          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy)
+          latlng.sqkm = sqkm;
           latlng_array.push(latlng);
         });
         console.log(latlng_array);
+      };
+
+      function get_midpoint(){
+        largest_blob = ''
+        $.each(latlng_array, function(index, latlng){
+          if (largest_blob.length === 0)
+            {
+              largest_blob = latlng;
+            } 
+          else if (latlng.sqkm > largest_blob.sqkm) 
+            {
+              largest_blob = latlng;
+            }
+          else {};
+        });
+        console.log(largest_blob);
       };
 
 
@@ -116,7 +134,6 @@
 
           var getBlobs = function(){
             var blobs = that.search.detectBlobs();
-            // console.log(blobs);
             i += 1;
             coordinates.push(blobs);
             if (i == 2) {
