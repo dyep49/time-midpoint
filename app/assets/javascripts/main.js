@@ -72,6 +72,18 @@ var map = map || {
             zoom: 12
         };
         var map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+
+        var marker, i;
+
+        for ( i = 0; i < app.locations.length; i++ ) {
+            var latitude = app.locations[i].latitude;
+            var longitude = app.locations[i].longitude;
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng( latitude, longitude ),
+                map: map
+            });
+        }
+
         app.elements.$results_map_div.css("height", "500px");
     }
 };
@@ -114,5 +126,6 @@ var app = app || {
 
 $(function() {
     app.initialize();
-//    map.render();
+    YELP();
+    map.render();
 });
