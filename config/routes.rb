@@ -6,4 +6,6 @@ TimeMidpoint::Application.routes.draw do
   get '/landing', to: "home#landing"
 
   resources :locations
+
+  resources :yelp_locations
 end
