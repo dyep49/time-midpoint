@@ -74,9 +74,17 @@ var iterator = 0;
 var Map = function() {
     var self = this;
 
+    this.marker_drop_lag = 300;
+
     this.initialize = function() {
         self.renderMap();
         self.renderMarkers();
+
+        // only run the infowindow creator after all the markers have dropped
+        setTimeout(function() {
+            self.renderInfoWindows();
+        }, app.locations.length * (self.marker_drop_lag+1) );
+
         self.renderInfoWindows();
     };
 
@@ -107,7 +115,7 @@ var Map = function() {
         for ( var i = 0; i < app.locations.length; i++ ) {
             setTimeout(function() {
                 addMarker();
-            }, i * 300);
+            }, i * self.marker_drop_lag);
         }
     };
 
