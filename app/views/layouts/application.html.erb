@@ -9,8 +9,6 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <body>
     <header>
     </header>
@@ -23,9 +21,6 @@
       <% else %>
         <%= button_to "Register", new_user_registration_path, :class => "btn btn-primary btn-lg", :method => "get" %>
         <%= button_to "Sign in", new_user_session_path, :class => "btn btn-primary btn-sm" %>
-=======
-=======
->>>>>>> 58469ddf61b98072f08fec240af347e74e9b5bb9
   <body id="landing-background">
     <div class="transparent">
       <% if user_signed_in? %>
@@ -36,10 +31,6 @@
           <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
         </div>
       </header>
-<<<<<<< HEAD
->>>>>>> d3a15c08c5970a6cc980f0cb695e1e87a8381a33
-=======
->>>>>>> 58469ddf61b98072f08fec240af347e74e9b5bb9
       <% end %>
         <div class="container">
         <div class="row">
