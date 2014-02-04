@@ -59,7 +59,7 @@ YELP = function(ll, category) {
                     // in the Location constructor
                     delete business["id"];
                     //var location_view = new LocationView( business );
-                    new Location(business);
+                    new YelpLocation(business);
                 });
                 map.renderMap();
             }
