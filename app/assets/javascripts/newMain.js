@@ -1,66 +1,51 @@
- <!DOCTYPE html>
-<html dir="ltr" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Mapnificent - API Example</title>
-    <meta name="robots" content="index, follow" />
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  </head>
-    <body>
-      <div id="map" style="width:500px;height:400px;"></div>
-      <div id="loading"></div>
-      <div id="copyright"></div>
-      <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-      //Instantiate map and pass it a div an options
+$(function() {
 
-      var map_div = $('#map')[0];
+	var map_div = $('#mapnificent-map')[0];
       
-      var mapOptions = {
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoom: 12,
-        center: new google.maps.LatLng(40.7577, -73.9857)
-      };
+  var mapOptions = {
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    zoom: 12,
+    center: new google.maps.LatLng(40.7577, -73.9857)
+  };
       
-      var map = new google.maps.Map(map_div, mapOptions);
+  var map = new google.maps.Map(map_div, mapOptions);
 
-      var coordinates = [[]];
-      var minutes = 10;        
+  var coordinates = [[]];
+  var minutes = 10;        
 
-      var mapnificent, urbanDistance, positions = {};
+  var mapnificent, urbanDistance, positions = {};
 
-      var latlng_array = []
+  var latlng_array = []
 
-      var get_coordinates = function(){
-        var coordinate_array = coordinates[coordinates.length-1]
-        $.each(coordinate_array, function(index, coordinates){
-          var midx = coordinates.midx;
-          var midy = coordinates.midy;
-          var sqkm = coordinates.sqkm;
-          latlng = mapnificent.getLatLngFromCanvasXY(midx, midy)
-          latlng.sqkm = sqkm;
-          latlng_array.push(latlng);
-        });
-        console.log(latlng_array);
-      };
+  var get_coordinates = function(){
+    var coordinate_array = coordinates[coordinates.length-1]
+    $.each(coordinate_array, function(index, coordinates){
+      var midx = coordinates.midx;
+      var midy = coordinates.midy;
+      var sqkm = coordinates.sqkm;
+      latlng = mapnificent.getLatLngFromCanvasXY(midx, midy)
+      latlng.sqkm = sqkm;
+      latlng_array.push(latlng);
+    });
+    console.log(latlng_array);
+  };
 
-      function get_midpoint(){
-        largest_blob = ''
-        $.each(latlng_array, function(index, latlng){
-          if (largest_blob.length === 0)
-            {
-              largest_blob = latlng;
-            } 
-          else if (latlng.sqkm > largest_blob.sqkm) 
-            {
-              largest_blob = latlng;
-            }
-          else {};
-        });
-        console.log(largest_blob);
-        return largest_blob;
-      };
+  function get_midpoint(){
+    largest_blob = ''
+    $.each(latlng_array, function(index, latlng){
+      if (largest_blob.length === 0)
+        {
+          largest_blob = latlng;
+        } 
+      else if (latlng.sqkm > largest_blob.sqkm) 
+        {
+          largest_blob = latlng;
+        }
+      else {};
+    });
+    console.log(largest_blob);
+    return largest_blob;
+  	};
 
 
 
@@ -171,10 +156,31 @@
       initialize();
     });
 
+	//MAPNIFICENT
 
-    </script>
-   
-  </body>
-</html>    
+	var button = $('#search-midpoint');
+	var userLocation = $("#user-location");
+	var friendLocation = $("#friend-location");
+	var userCoordinate = {};
+	var friendCoordinate = {};
+	$(userLocation).geocomplete().bind("geocode:result", function(event, result){
+		var latitude = result.geometry.location.d;
+		var longitude = result.geometry.location.e;
+    	var locationInput = {};
+    	userCoordinate.latitude = latitude;
+    	userCoordinate.longitude = longitude;
+    	console.log(userCoordinate);
+  });
+	$(friendLocation).geocomplete().bind("geocode:result", function(event, result){
+		var latitude = result.geometry.location.d;
+		var longitude = result.geometry.location.e;
+		friendCoordinate.latitude = latitude;
+		friendCoordinate.longitude = longitude;
+		console.log(friendCoordinate);
+  });
 
+	submit_stuff = {};
+	submit_stuff.user = userCoordinate;
+	submit_stuff.friend = friendCoordinate;
+});
 
