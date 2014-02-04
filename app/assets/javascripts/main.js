@@ -76,21 +76,30 @@ var map = map || {
         };
         var map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
 
-        var marker, i;
 
-        for ( i = 0; i < app.locations.length; i++ ) {
+        for ( var i = 0; i < app.locations.length; i++ ) {
             var latitude = app.locations[i].lat;
             var longitude = app.locations[i].lng;
 
-            marker = new google.maps.Marker({
+            //setTimeout(function() {
+                createMarker(latitude, longitude);
+//            }, i * 200);
+        }
+
+
+        function createMarker(latitude, longitude) {
+            var marker = new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
                 animation: google.maps.Animation.DROP,
                 map: map
             });
         }
 
+
         app.elements.$results_map_div.css("height", "500px");
     }
+
+
 };
 
 var app = app || {
