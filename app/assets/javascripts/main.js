@@ -61,6 +61,7 @@ YELP = function(ll, category) {
                     //var location_view = new LocationView( business );
                     new Location(business);
                 });
+                map.renderMap();
             }
         });
     };
@@ -79,6 +80,7 @@ var map = map || {
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
+        map.renderMarkers();
     },
     renderMarkers: function() {
         function addMarker() {
@@ -90,7 +92,6 @@ var map = map || {
                 map: google_map,
                 animation: google.maps.Animation.DROP
             });
-
             iterator++;
         }
 
@@ -107,7 +108,7 @@ var app = app || {
         app.locations = [];
         app.views = [];
         app.constants = {
-            // Designated the maximum amount of locations that
+            // designated the maximum amount of locations that
             //can be added for midpoint calculation  (excluding user's location)
             MAX_LOCATION_INPUTS: 2
         };
@@ -140,6 +141,5 @@ var app = app || {
 
 $(function() {
     app.initialize();
-    //    YELP();
-    //    map.render();
+//    YELP();
 });
