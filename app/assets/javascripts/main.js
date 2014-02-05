@@ -64,10 +64,12 @@ YELP = function(ll, category) {
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
-                console.log(ll);
-                var map = new Map(ll);
-                map.initialize();
-                setTimeout(function(){google.maps.event.trigger(map, 'resize')}, 1000);
+
+                setTimeout(function(){
+                    var map = new Map(ll);
+                    map.initialize();
+                    google.maps.event.trigger(map, 'resize');
+                }, 1000);
             }
         });
     };
@@ -77,9 +79,11 @@ var google_map;
 var iterator = 0;
 
 var Map = function(ll) {
-    console.log(ll);
     var self = this;
     this.marker_drop_lag = 300;
+
+    this.magnificent_lat = ll.split(",")[0];
+    this.magnificent_lon = ll.split(",")[1];
 
     this.initialize = function() {
         self.renderMap();
@@ -88,23 +92,33 @@ var Map = function(ll) {
         // only run the infowindow creator after all the markers have dropped
         setTimeout(function() {
             self.renderInfoWindows();
-        }, app.locations.length * (self.marker_drop_lag+1) );
+        }, (app.locations.length + 1) * self.marker_drop_lag );
 
         self.renderInfoWindows();
     };
 
     this.renderMap = function() {
-        var midpoint_lat = parseFloat( ll.split(",")[0] );
-        var midpoint_lng = parseFloat( ll.split(",")[1] );
-        alert("latitude is: " + midpoint_lat + " and longitude is: " + midpoint_lng);
+
+        var midpoint_lat = app.locations[1].lat;
+        var midpoint_lng = app.locations[1].lng;
+
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 15
+            zoom: 14
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
         app.elements.$results_map_div.css("width", "500px");
 
+    };
+
+    this.renderMagnificentMarker = function() {
+        var new_marker = new google.maps.Marker({
+            position: new google.maps.LatLng( self.magnificent_lat, self.magnificent_lon ),
+            map: google_map,
+            animation: google.maps.Animation.DROP,
+            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|009ACD"
+            });
     };
 
     this.renderMarkers = function() {
@@ -136,6 +150,7 @@ var Map = function(ll) {
                 addMarker();
             }, i * self.marker_drop_lag);
         }
+        self.renderMagnificentMarker();
     };
 
     this.renderInfoWindows = function() {
@@ -149,11 +164,10 @@ var Map = function(ll) {
 
                 // close all currently open infowindows
                 app.my_infowindows.forEach(function(info_obj) {
-                    if ( info_obj.opened == true ) {
+                    if ( info_obj.opened == true && info_obj != infowindow ) {
                         info_obj.close();
                     }
                 });
-
                 infowindow.opened = true;
             });
 
