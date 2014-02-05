@@ -175,6 +175,7 @@ var Map = function(ll) {
 var app = app || {
     initialize: function() {
         app.locations = [];
+        app.db_locations = [];
         app.views = [];
         app.markers = [];
         app.constants = {
