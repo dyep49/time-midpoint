@@ -114,12 +114,23 @@ var Map = function(ll) {
     };
 
     this.renderMagnificentMarker = function() {
-        var new_marker = new google.maps.Marker({
+        var midpoint_marker = new google.maps.Marker({
             position: new google.maps.LatLng( self.magnificent_lat, self.magnificent_lon ),
             map: google_map,
             animation: google.maps.Animation.DROP,
             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|009ACD"
             });
+
+        google.maps.event.addListener(midpoint_marker, 'click', toggleBounce);
+
+        function toggleBounce() {
+            if (midpoint_marker.getAnimation() != null) {
+                midpoint_marker.setAnimation(null);
+            } else {
+                midpoint_marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        }
+
     };
 
     this.renderMarkers = function() {
