@@ -64,10 +64,12 @@ YELP = function(ll, category) {
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
-                console.log(ll);
-                var map = new Map(ll);
-                map.initialize();
-                setTimeout(function(){google.maps.event.trigger(map, 'resize');}, 1000);
+
+                setTimeout(function(){
+                    var map = new Map(ll);
+                    map.initialize();
+                    google.maps.event.trigger(map, 'resize');
+                }, 1000);
             }
         });
     };
@@ -94,8 +96,10 @@ var Map = function(ll) {
     };
 
     this.renderMap = function() {
-        var midpoint_lat = parseFloat( ll.split(",")[0] );
-        var midpoint_lng = parseFloat( ll.split(",")[1] );
+
+        var midpoint_lat = app.locations[1].lat;
+        var midpoint_lng = app.locations[1].lng;
+
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
             zoom: 14
@@ -127,7 +131,6 @@ var Map = function(ll) {
 
             new_marker.custom_infowindow_text = content_string.join("");
             app.markers.push( new_marker );
-            console.log( iterator );
             iterator++;
         }
 
