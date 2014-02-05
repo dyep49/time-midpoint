@@ -39,10 +39,12 @@
             {
               largest_blob = latlng;
             }
-          else {};
+          else {
+            return;
+          };
         });
         console.log(largest_blob);
-        return largest_blob;
+        largest_blob.lat.toString() + ", " + largest_blob.lng.toString()
       };
 
 
@@ -69,7 +71,7 @@
           that.bind("dataLoaded", function(){
 
           	//Times Square
-            var geopos = {lat: 40.7577, lng: -73.9857};
+            var geopos = {lat: submit_stuff.user.latitude, lng: submit_stuff.user.longitude};
             var time = minutes *60;
             var pos = that.addPosition(geopos, time);
 
@@ -80,7 +82,7 @@
 
 
             // 7th st and Ave B
-            var geopos_3 = {lat: 40.724788, lng: -73.980721};
+            var geopos_3 = {lat: submit_stuff.friend.latitude, lng: submit_stuff.user.longitude};
             var time_3 = minutes *60;
             var pos_3 = that.addPosition(geopos_3, time_3);
 
@@ -127,6 +129,9 @@
                 mapnificent.destroy();
                 $('iframe').remove();
                 initialize();
+              }
+              else {
+                get_midpoint();
               };
             };
           };
@@ -150,58 +155,34 @@
     };
 
  
-    $(document).ready(function(){
-    		var button = $('#search-midpoint');
-				var userLocation = $("#user-location");
-				var friendLocation = $("#friend-location");
-				var userCoordinate = {};
-				var friendCoordinate = {};
-				$(userLocation).geocomplete().bind("geocode:result", function(event, result){
-					var latitude = result.geometry.location.d;
-					var longitude = result.geometry.location.e;
-			    	var locationInput = {};
-			    	userCoordinate.latitude = latitude;
-			    	userCoordinate.longitude = longitude;
-			    	console.log(userCoordinate);
-			  });
-				$(friendLocation).geocomplete().bind("geocode:result", function(event, result){
-					var latitude = result.geometry.location.d;
-					var longitude = result.geometry.location.e;
-					friendCoordinate.latitude = latitude;
-					friendCoordinate.longitude = longitude;
-					console.log(friendCoordinate);
-  });
-
-	submit_stuff = {};
-	submit_stuff.user = userCoordinate;
-	submit_stuff.friend = friendCoordinate;
+  $(document).ready(function(){
+    $('#search-midpoint').click(function(){
       initialize();
-    });
-	// MAPNIFICENT
-
-	var button = $('#search-midpoint');
-	var userLocation = $("#user-location");
-	var friendLocation = $("#friend-location");
-	var userCoordinate = {};
-	var friendCoordinate = {};
-	$(userLocation).geocomplete().bind("geocode:result", function(event, result){
-		var latitude = result.geometry.location.d;
-		var longitude = result.geometry.location.e;
-    	var locationInput = {};
-    	userCoordinate.latitude = latitude;
-    	userCoordinate.longitude = longitude;
-    	console.log(userCoordinate);
-  });
-	$(friendLocation).geocomplete().bind("geocode:result", function(event, result){
-		var latitude = result.geometry.location.d;
-		var longitude = result.geometry.location.e;
-		friendCoordinate.latitude = latitude;
-		friendCoordinate.longitude = longitude;
-		console.log(friendCoordinate);
+    })
   });
 
-	submit_stuff = {};
-	submit_stuff.user = userCoordinate;
-	submit_stuff.friend = friendCoordinate;
 
+var button = $('#search-midpoint');
+  var userLocation = $("#user-location");
+  var friendLocation = $("#friend-location");
+  var userCoordinate = {};
+  var friendCoordinate = {};
+  $(userLocation).geocomplete().bind("geocode:result", function(event, result){
+    var latitude = result.geometry.location.d;
+    var longitude = result.geometry.location.e;
+      var locationInput = {};
+      userCoordinate.latitude = latitude;
+      userCoordinate.longitude = longitude;
+      console.log(userCoordinate);
+  });
+  $(friendLocation).geocomplete().bind("geocode:result", function(event, result){
+    var latitude = result.geometry.location.d;
+    var longitude = result.geometry.location.e;
+    friendCoordinate.latitude = latitude;
+    friendCoordinate.longitude = longitude;
+    console.log(friendCoordinate);
+  });
 
+  submit_stuff = {};
+  submit_stuff.user = userCoordinate;
+  submit_stuff.friend = friendCoordinate;
