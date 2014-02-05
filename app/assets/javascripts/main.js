@@ -61,7 +61,10 @@ YELP = function(ll, category) {
                     //var location_view = new LocationView( business );
                     new YelpLocation(business);
                 });
-                map.renderMap();
+                // KILL THE MAGNIFICENT MAP
+                //$("#mapnificent-map").remove();
+                var map = new Map();
+                map.initialize();
             }
         });
     };
@@ -70,47 +73,97 @@ YELP = function(ll, category) {
 var google_map;
 var iterator = 0;
 
-var map = map || {
-    renderMap: function() {
+var Map = function() {
+    var self = this;
+    this.marker_drop_lag = 300;
+
+    this.initialize = function() {
+        self.renderMap();
+        self.renderMarkers();
+
+        // only run the infowindow creator after all the markers have dropped
+        setTimeout(function() {
+            self.renderInfoWindows();
+        }, app.locations.length * (self.marker_drop_lag+1) );
+
+        self.renderInfoWindows();
+    };
+
+    this.renderMap = function() {
         var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
         var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 12
+            zoom: 15
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
-        map.renderMarkers();
-        map.renderInfoWindows();
-    },
-    renderMarkers: function() {
+    };
+
+    this.renderMarkers = function() {
         function addMarker() {
             var latitude = app.locations[iterator].lat;
             var longitude = app.locations[iterator].lng;
 
-            app.markers.push(new google.maps.Marker({
+            var new_marker = new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
                 animation: google.maps.Animation.DROP
-            }));
+            });
+
+            var content_string = [
+                "<div>",
+                "<h3>",
+                app.locations[iterator].name,
+                "</h3>",
+                "</div>"
+            ];
+
+            new_marker.custom_infowindow_text = content_string.join("");
+            app.markers.push( new_marker );
             iterator++;
         }
 
         for ( var i = 0; i < app.locations.length; i++ ) {
             setTimeout(function() {
                 addMarker();
-            }, i * 300);
+            }, i * self.marker_drop_lag);
         }
-    },
+    };
 
-    renderInfoWindows: function() {
+    this.renderInfoWindows = function() {
         app.markers.forEach(function(marker) {
-            google.maps.event.addListener(marker, 'click', function() {
-                console.log("hello world");
+            var infowindow = new google.maps.InfoWindow({
+                content: marker.custom_infowindow_text
             });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open( google_map, marker );
+
+                // close all currently open infowindows
+                app.my_infowindows.forEach(function(info_obj) {
+                    if ( info_obj.opened == true ) {
+                        info_obj.close();
+                    }
+                });
+
+                infowindow.opened = true;
+            });
+
+            google.maps.event.addListener(google_map, 'click', function() {
+                infowindow.close();
+                infowindow.opened = false;
+            });
+
+            infowindow.opened = false;
+
+            app.my_infowindows.push( infowindow );
         });
-    }
+    };
+    app.my_infowindows = [];
 };
+
+
 
 var app = app || {
     initialize: function() {
@@ -124,32 +177,11 @@ var app = app || {
         };
 
         app.elements = {
-            $add_location_btn: $("#add_location_btn"),
-            $non_user_location_inputs: $("#non_user_location_inputs"),
             $results_map_div: $("#results_map")
         };
-        app.addEventListeners();
-    },
-
-    addEventListeners: function() {
-        // Adds a new location input box
-        app.elements.$add_location_btn.on("click", function(e) {
-            e.preventDefault(); // prevent page from refreshing and such
-            var number_of_inputs = app.elements.$non_user_location_inputs.children().length;
-
-            if ( number_of_inputs < app.constants.MAX_LOCATION_INPUTS ) {
-                var $first_destination_input =  app.elements.$non_user_location_inputs.children().first();
-                var $new_location_input = $first_destination_input.clone();
-                $new_location_input.attr( "placeholder", "Enter Destination " + ( number_of_inputs + 1 ) );
-                app.elements.$non_user_location_inputs.append( $new_location_input );
-            } else {
-                alert("Cannot add more locations");
-            }
-        });
     }
 };
 
 $(function() {
     app.initialize();
-
 });
