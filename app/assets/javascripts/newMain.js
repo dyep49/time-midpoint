@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(function() {
 
 	var map_div = $('#mapnificent-map')[0];
@@ -13,20 +12,6 @@ $(function() {
 
   var coordinates = [[]];
   var minutes = 10;
-=======
-  var map_div = $('#map')[0];
-
-      var mapOptions = {
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        zoom: 12,
-        center: new google.maps.LatLng(40.7577, -73.9857)
-      };
-
-      var map = new google.maps.Map(map_div, mapOptions);
-
-      var coordinates = [[]];
-      var minutes = 10;
->>>>>>> a726ef37425b9df6fec05dadd93dad41120c73f1
 
       var mapnificent, urbanDistance, positions = {};
 
@@ -45,24 +30,6 @@ $(function() {
         console.log(latlng_array);
       };
 
-<<<<<<< HEAD
-  function get_midpoint(){
-    largest_blob = ''
-    $.each(latlng_array, function(index, latlng){
-      if (largest_blob.length === 0)
-        {
-          largest_blob = latlng;
-        }
-      else if (latlng.sqkm > largest_blob.sqkm)
-        {
-          largest_blob = latlng;
-        }
-      else {};
-    });
-    console.log(largest_blob);
-    return largest_blob;
-  	};
-=======
       function get_midpoint(){
         largest_blob = ''
         $.each(latlng_array, function(index, latlng){
@@ -79,9 +46,6 @@ $(function() {
         console.log(largest_blob);
         return largest_blob;
       };
->>>>>>> a726ef37425b9df6fec05dadd93dad41120c73f1
-
-
 
       function initialize(){
         var i = 0
