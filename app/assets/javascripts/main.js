@@ -138,12 +138,25 @@ var Map = function() {
             });
 
             google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open( google_map, marker );
+                infowindow.open( google_map, marker );
+
+                // close all currently open infowindows
+                app.my_infowindows.forEach(function(info_obj) {
+                    if ( info_obj.opened == true ) {
+                        info_obj.close();
+                    }
+                });
+
+                infowindow.opened = true;
             });
 
             google.maps.event.addListener(google_map, 'click', function() {
                 infowindow.close();
+                infowindow.opened = false;
             });
+
+            infowindow.opened = false;
+
             app.my_infowindows.push( infowindow );
         });
     };
