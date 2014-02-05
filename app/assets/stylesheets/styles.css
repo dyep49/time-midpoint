@@ -5,8 +5,56 @@ header {
 	opacity: 0.9;
 }
 
+
+
 #user-info {
 	float: right;
+
+}
+
+.back-splash {
+
+	background-color: #D99C2B;
+	/*margin: 5%;*/
+	/*width: 100%;*/
+	padding: 30px;
+	/*position: absolute; */
+	border-radius: 20px;
+	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+
+}
+
+.input {
+	width: 85%;
+	overflow: visible;
+}
+
+.input-container {
+
+	/*position: relative;*/
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+}
+
+#point-logo {
+	float: right;
+	width: 50px
+}
+
+.input-bar {
+	background-color: #7E8AA2;;
+	/*background-color: #183EB5;*/
+	width: 50%;
+	margin: 5%;
+	padding: 30px;
+	/*position: absolute; */
+	border-radius: 20px;
+	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 
 }
 
@@ -68,7 +116,7 @@ div .center {
 	margin-top: 8px;
 }
 
-#sign-up {
+.sign-up {
 	background-color: #D99C2B;
 	position: absolute;
 	margin: 5%;
@@ -87,6 +135,7 @@ div .center {
 	margin-bottom: 0px;
 }
 #results_map {
+
 	width: 500px;
 	height: 500px;
 	background-color: red;
