@@ -64,7 +64,7 @@ YELP = function(ll, category) {
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
-                var map = new Map();
+                var map = new Map(ll);
                 map.initialize();
             }
         });
@@ -74,7 +74,7 @@ YELP = function(ll, category) {
 var google_map;
 var iterator = 0;
 
-var Map = function() {
+var Map = function(ll) {
     var self = this;
     this.marker_drop_lag = 300;
 
@@ -91,8 +91,9 @@ var Map = function() {
     };
 
     this.renderMap = function() {
-        var midpoint_lat = parseFloat( getMidpointCoords().split(",")[0] );
-        var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
+        var midpoint_lat = parseFloat( ll.split(",")[0] );
+        var midpoint_lng = parseFloat( ll.split(",")[1] );
+        alert("latitude is: " + midpoint_lat + " and longitude is: " + midpoint_lng);
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
             zoom: 15
@@ -114,7 +115,7 @@ var Map = function() {
 
             var content_string = [
                 "<div>",
-                "<h3>",
+                "<h3>"x,
                 app.locations[iterator].name,
                 "</h3>",
                 "</div>"
