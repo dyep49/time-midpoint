@@ -62,7 +62,7 @@ YELP = function(ll, category) {
                     new YelpLocation(business);
                 });
                 // KILL THE MAGNIFICENT MAP
-                // $("#mapnificent-map").remove();
+                //$("#mapnificent-map").remove();
                 var map = new Map();
                 map.initialize();
             }
@@ -117,11 +117,9 @@ var Map = function() {
                 app.locations[iterator].name,
                 "</h3>",
                 "</div>"
-
             ];
 
             new_marker.custom_infowindow_text = content_string.join("");
-
             app.markers.push( new_marker );
             iterator++;
         }
@@ -139,21 +137,20 @@ var Map = function() {
                 content: marker.custom_infowindow_text
             });
 
-            console.log(marker.infowindow);
-
             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open( google_map, marker );
+                    infowindow.open( google_map, marker );
             });
-
 
             google.maps.event.addListener(google_map, 'click', function() {
                 infowindow.close();
             });
-
+            app.my_infowindows.push( infowindow );
         });
     };
-
+    app.my_infowindows = [];
 };
+
+
 
 var app = app || {
     initialize: function() {
@@ -167,32 +164,11 @@ var app = app || {
         };
 
         app.elements = {
-            $add_location_btn: $("#add_location_btn"),
-            $non_user_location_inputs: $("#non_user_location_inputs"),
             $results_map_div: $("#results_map")
         };
-        app.addEventListeners();
-    },
-
-    addEventListeners: function() {
-        // Adds a new location input box
-        app.elements.$add_location_btn.on("click", function(e) {
-            e.preventDefault(); // prevent page from refreshing and such
-            var number_of_inputs = app.elements.$non_user_location_inputs.children().length;
-
-            if ( number_of_inputs < app.constants.MAX_LOCATION_INPUTS ) {
-                var $first_destination_input =  app.elements.$non_user_location_inputs.children().first();
-                var $new_location_input = $first_destination_input.clone();
-                $new_location_input.attr( "placeholder", "Enter Destination " + ( number_of_inputs + 1 ) );
-                app.elements.$non_user_location_inputs.append( $new_location_input );
-            } else {
-                alert("Cannot add more locations");
-            }
-        });
     }
 };
 
 $(function() {
     app.initialize();
-
 });
