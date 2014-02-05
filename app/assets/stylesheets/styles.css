@@ -10,6 +10,19 @@ header {
 
 }
 
+.links {
+	  color: white;
+	  font-size: 16px;
+}
+
+.links a {
+	  color: white;
+	  font-size: 16px;
+	  float: right;
+}
+
+.home-right { float: right;}
+
 div .center {
 	text-align: center;
 }
@@ -50,13 +63,13 @@ div .center {
 
 .btn {
 	border: none;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 	border-radius: 0px;
-	margin-top: 10px;
+	margin-top: 8px;
 }
 
 #sign-up {
-	background-color: #FFB01E;
+	background-color: #D99C2B;
 	position: absolute;
 	margin: 5%;
 	padding: 30px;
@@ -71,7 +84,7 @@ div .center {
 }
 
 #logo {
-	margin-bottom: 100px;
+	margin-bottom: 0px;
 }
 #results_map {
 	width: 500px;
