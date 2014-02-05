@@ -68,6 +68,30 @@ self.create = function(){
     })
 
   }
+
+  
+  self.update = function(tag, address) {
+
+      var params = {
+        "tag": tag,
+        "address": address,
+        "long": lng,
+        "lat": lat,
+      }
+
+    $.ajax({
+      url: "/locations/"+ this.id,
+      type: "put",
+      dataType: "json",
+      data: params,
+      success: function(data){
+        console.log(data);
+      }
+
+
+    })
+
+  }
  app.locations.push(self);
 };
 
