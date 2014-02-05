@@ -27,7 +27,7 @@ YELP = function(ll, category) {
 
     var parameters = [];
     parameters.push(['term', category]);
-    parameters.push(['limit', "6"] );
+    parameters.push(['limit', "5"] );
     parameters.push( ["ll", ll] ) ;
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -79,9 +79,11 @@ var google_map;
 var iterator = 0;
 
 var Map = function(ll) {
-    console.log(ll);
     var self = this;
     this.marker_drop_lag = 300;
+
+    this.magnificent_lat = ll.split(",")[0];
+    this.magnificent_lon = ll.split(",")[1];
 
     this.initialize = function() {
         self.renderMap();
@@ -108,6 +110,15 @@ var Map = function(ll) {
         app.elements.$results_map_div.css("height", "500px");
         app.elements.$results_map_div.css("width", "500px");
 
+    };
+
+    this.renderMagnificentMarker = function() {
+        var new_marker = new google.maps.Marker({
+            position: new google.maps.LatLng( self.magnificent_lat, self.magnificent_lon ),
+            map: google_map,
+            animation: google.maps.Animation.DROP,
+            icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|009ACD"
+            });
     };
 
     this.renderMarkers = function() {
@@ -139,6 +150,7 @@ var Map = function(ll) {
                 addMarker();
             }, i * self.marker_drop_lag);
         }
+        self.renderMagnificentMarker();
     };
 
     this.renderInfoWindows = function() {
