@@ -8,7 +8,7 @@ var mapOptions = {
 var map = new google.maps.Map(map_div, mapOptions);
 
 var coordinates = [];
-var minutes = 10;        
+var minutes = 10;
 
 var mapnificent, urbanDistance, positions = {};
 
@@ -33,8 +33,8 @@ function get_midpoint(){
     if (largest_blob.length === 0)
       {
         largest_blob = latlng;
-      } 
-    else if (latlng.sqkm > largest_blob.sqkm) 
+      }
+    else if (latlng.sqkm > largest_blob.sqkm)
       {
         largest_blob = latlng;
       }
@@ -57,7 +57,6 @@ function get_midpoint(){
         var intersect = that.getOption("intersect");
         that.setOption("intersection", true);
         console.log("setup complete");
-        alert("Testing" + minutes + "minutes");
       });
 
       that.bind("loadProgress", function(progress){
@@ -116,7 +115,6 @@ function get_midpoint(){
             $('#map').remove();
             $('iframe').remove();
             YELP(coordinate_string, 'cafe')();
-            alert('yelp running');
           };
         };
       };
@@ -139,7 +137,7 @@ function get_midpoint(){
   };
 };
 
- 
+
   $(document).ready(function(){
     $('#search-midpoint').click(function(){
       initialize();

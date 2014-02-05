@@ -27,7 +27,7 @@ YELP = function(ll, category) {
 
     var parameters = [];
     parameters.push(['term', category]);
-    parameters.push(['limit', "5"] );
+    parameters.push(['limit', "6"] );
     parameters.push( ["ll", ll] ) ;
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
@@ -88,7 +88,7 @@ var Map = function(ll) {
         // only run the infowindow creator after all the markers have dropped
         setTimeout(function() {
             self.renderInfoWindows();
-        }, app.locations.length * (self.marker_drop_lag+1) );
+        }, (app.locations.length + 1) * self.marker_drop_lag );
 
         self.renderInfoWindows();
     };
@@ -96,10 +96,9 @@ var Map = function(ll) {
     this.renderMap = function() {
         var midpoint_lat = parseFloat( ll.split(",")[0] );
         var midpoint_lng = parseFloat( ll.split(",")[1] );
-        alert("latitude is: " + midpoint_lat + " and longitude is: " + midpoint_lng);
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 15
+            zoom: 14
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
@@ -128,6 +127,7 @@ var Map = function(ll) {
 
             new_marker.custom_infowindow_text = content_string.join("");
             app.markers.push( new_marker );
+            console.log( iterator );
             iterator++;
         }
 
