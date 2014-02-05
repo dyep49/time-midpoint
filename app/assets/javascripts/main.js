@@ -55,6 +55,7 @@ YELP = function(ll, category) {
             'dataType': 'jsonp',
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
+                console.log(data);
                 data.businesses.forEach(function(business) {
                     // we do this because the yelp id is not the id we want to use
                     // in the Location constructor
@@ -133,10 +134,12 @@ var Map = function(ll) {
             });
 
             var content_string = [
-                "<div>",
-                "<h3>",
+                "<div class='infowindow'>",
+                "<h4>",
                 app.locations[iterator].name,
-                "</h3>",
+                "</h4>",
+                "<img class='rating-pic' src='" + app.locations[iterator].rating_img + "'>",
+                "<img class='yelp-pic' src='" + app.locations[iterator].image_url + "'>",
                 "</div>"
             ];
 
