@@ -16,6 +16,26 @@ class LocationsController < ApplicationController
        render json: location
   end 
 
+  def update
+    location = Location.find(params[:id])
+    
+    updated_tag = params["tag"]
+    updated_address = params["address"]
+
+    location.update_attributes(
+      address: updated_address,
+      tag: updated_tag)
+
+    render json: location
+  end
+
+  def edit
+
+  end
+
+  def show
+  end 
+
 end
 
 
