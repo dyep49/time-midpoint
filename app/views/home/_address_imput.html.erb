@@ -1,6 +1,15 @@
-     <hr>
-      <label for="user-location">Your Location</label><input type="text" id="user-location">
-      <label for="user-location">Friend's Location</label><input type="text" id="friend-location">
-      <label for="user-location">type of activity</label><input type="text">
-      <button id="search-midpoint">Search</button>
-      <hr>
+<!-- <div id="sign-up"> -->
+<div class= "input-container">
+  <div class="input-bar"> 
+    Your Location: <input class="input form-control" type="text" id="user-location">
+
+    Friend's Location: <input class="input form-control" type="text" id="friend-location">
+    Type of activity: <input class="input form-control" type="text">
+    <button id="search-midpoint">Search</button>
+    <div class="row">
+      <div class="col-lg-9">
+          <div class = "col-lg-3"><%= image_tag "point.png", :id => "point-logo"%></div>
+      </div>
+    </div>
+  </div>
+</div>
