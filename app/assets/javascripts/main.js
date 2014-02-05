@@ -94,7 +94,7 @@ var Map = function() {
         var midpoint_lng = parseFloat( getMidpointCoords().split(",")[1] );
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 12
+            zoom: 15
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
