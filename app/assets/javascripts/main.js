@@ -149,11 +149,10 @@ var Map = function(ll) {
 
                 // close all currently open infowindows
                 app.my_infowindows.forEach(function(info_obj) {
-                    if ( info_obj.opened == true ) {
+                    if ( info_obj.opened == true && info_obj != infowindow ) {
                         info_obj.close();
                     }
                 });
-
                 infowindow.opened = true;
             });
 
