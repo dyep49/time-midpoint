@@ -112,6 +112,9 @@ function get_midpoint(){
           }
           else {
             var coordinate_string = get_midpoint();
+            mapnificent.destroy();
+            $('#map').remove();
+            $('iframe').remove();
             YELP(coordinate_string, 'cafe')();
             alert('yelp running');
           };
