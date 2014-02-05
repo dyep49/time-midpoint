@@ -67,7 +67,7 @@ YELP = function(ll, category) {
                 console.log(ll);
                 var map = new Map(ll);
                 map.initialize();
-                setTimeout(function(){google.maps.event.trigger(map, 'resize')}, 1000);
+                setTimeout(function(){google.maps.event.trigger(map, 'resize');}, 1000);
             }
         });
     };
