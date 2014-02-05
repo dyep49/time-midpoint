@@ -64,8 +64,10 @@ YELP = function(ll, category) {
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
+                console.log(ll);
                 var map = new Map(ll);
                 map.initialize();
+                setTimeout(function(){google.maps.event.trigger(map, 'resize')}, 1000);
             }
         });
     };
@@ -75,6 +77,7 @@ var google_map;
 var iterator = 0;
 
 var Map = function(ll) {
+    console.log(ll);
     var self = this;
     this.marker_drop_lag = 300;
 
@@ -99,7 +102,9 @@ var Map = function(ll) {
             zoom: 15
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
-        app.elements.$results_map_div.css("height", "500px");
+        app.elements.$results_map_div.css("height", "100px");
+        app.elements.$results_map_div.css("width", "100px");
+
     };
 
     this.renderMarkers = function() {
