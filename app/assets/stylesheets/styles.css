@@ -73,3 +73,8 @@ div .center {
 #logo {
 	margin-bottom: 100px;
 }
+#results_map {
+	width: 500px;
+	height: 500px;
+	background-color: red;
+}
