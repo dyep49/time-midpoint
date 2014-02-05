@@ -85,7 +85,7 @@ self.create = function(){
       success: function(data){
         console.log(data);
       }
-
+        //this needs also to update long anf lat 
 
     });
 
