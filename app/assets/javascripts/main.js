@@ -102,8 +102,8 @@ var Map = function(ll) {
             zoom: 15
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
-        app.elements.$results_map_div.css("height", "100px");
-        app.elements.$results_map_div.css("width", "100px");
+        app.elements.$results_map_div.css("height", "500px");
+        app.elements.$results_map_div.css("width", "500px");
 
     };
 
