@@ -1,10 +1,11 @@
-var getMidpointCoords = function() {
+/*var getMidpointCoords = function() {
     return "40.7278202,-73.9980006";
 };
 
 var getCategory = function() {
     return "cafe";
 };
+ */
 
 // this closure takes two parameters
 // parameter1 = ll = "<latitude>,<longitude>"
