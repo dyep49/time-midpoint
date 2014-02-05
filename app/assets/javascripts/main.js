@@ -68,7 +68,7 @@ YELP = function(ll, category) {
             }
         });
     };
-}( getMidpointCoords(), getCategory() );
+};
 
 var google_map;
 var iterator = 0;
