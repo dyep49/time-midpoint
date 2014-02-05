@@ -13,13 +13,16 @@
     <div class='<%="transparent"%>'>
     <%end%>
       <div class="container">
-      <% if user_signed_in? %>
+     
         <header>
-          <div id="user-info">
-            <p>Hi <strong><%= current_user.first_name%></strong>.</p>
-            <%= link_to 'Edit profile', edit_user_registration_path %>
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-          </div>
+          <% if user_signed_in? %>
+          <ul class= "nav nav-tabs">
+             
+            <li class = "links"><strong>Hi, <%= current_user.first_name%></strong></li>
+            <li class = "links"><%= link_to 'Edit profile', edit_user_registration_path %></li>
+            <li class = "links"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+
         </header>
       <% end %>
         <div class="row">
