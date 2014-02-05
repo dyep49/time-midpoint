@@ -115,7 +115,7 @@ var Map = function(ll) {
 
             var content_string = [
                 "<div>",
-                "<h3>"x,
+                "<h3>",
                 app.locations[iterator].name,
                 "</h3>",
                 "</div>"
