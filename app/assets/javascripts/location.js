@@ -1,5 +1,3 @@
-
-
 function fetchAllLocations(){
   $.ajax({
     url: "/locations",
@@ -10,9 +8,9 @@ function fetchAllLocations(){
       var location_array = data;
       location_array.forEach(function(location){
         var new_location = new Location(location.lat, location.lng, location.tag, location.id)
-      })
+      });
     }
-  })
+  });
 };
 
 
@@ -20,7 +18,7 @@ var Location = function(tag, address, id){
   var self = this;
   self.tag = tag;
   self.address = address;
-  self.lng; 
+  self.lng;
   self.lat;
   self.id = id;
 
@@ -42,9 +40,9 @@ self.create = function(){
       "tag": self.tag,
       "address": self.address,
       "long": self.lng,
-      "lat": self.lat,
+      "lat": self.lat
     }
-  }
+  };
     $.ajax({
       url: "/locations",
       data: params,
@@ -54,22 +52,22 @@ self.create = function(){
         console.log(data);
         self.id = data.id
       }
-    })
-  }
+    });
+  };
   self.destroy = function(){
     $.ajax({
       url: "/locations/"+ this.id,
       type: "delete",
       dataType: "json",
       success: function(data){
-        var deleted_locations = data
-        array = array.splice(deleted_locations, 1)
+        var deleted_locations = data;
+        array = array.splice(deleted_locations, 1);
       }
-    })
+    });
 
-  }
+  };
 
-  
+
   self.update = function(tag, address) {
 
       var params = {
@@ -77,7 +75,7 @@ self.create = function(){
         "address": address,
         "long": lng,
         "lat": lat,
-      }
+      };
 
     $.ajax({
       url: "/locations/"+ this.id,
@@ -89,10 +87,9 @@ self.create = function(){
       }
 
 
-    })
+    });
 
-  }
- app.locations.push(self);
+  };
+
+    app.db_locations.push(self);
 };
-
-
