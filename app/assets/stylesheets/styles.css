@@ -1,11 +1,26 @@
 header {
-	min-height: 100px;
+	/*min-height: 100px;*/
 	padding: 20px;
 	background-color: #7E8AA2;
 	opacity: 0.9;
+	height: 150px;
+
 }
 
+.bar {
+	width: 100%;
+}
 
+body {
+	background: url(nyvintage.jpg) no-repeat center center fixed; 
+	
+ /*filter: alpha(opacity=40);*/
+}
+
+/*.container {
+	width: 100%;
+}
+*/
 
 #user-info {
 	float: right;
@@ -14,7 +29,8 @@ header {
 
 .back-splash {
 
-	background-color: #D99C2B;
+	/*background-color: #D99C2B;*/
+	background-color: rgba(217, 156, 43, 0.8);
 	/*margin: 5%;*/
 	/*width: 100%;*/
 	padding: 30px;
@@ -23,7 +39,7 @@ header {
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
-
+	
 }
 
 .input {
@@ -37,6 +53,8 @@ header {
 	height: 100%;
 	width: 100%;
 	min-height: 100%;
+
+
 }
 
 #point-logo {
@@ -44,17 +62,21 @@ header {
 	width: 50px
 }
 
+/*Nav bar log*/
+
+
 .input-bar {
 	background-color: #7E8AA2;;
 	/*background-color: #183EB5;*/
 	width: 50%;
-	margin: 5%;
+	margin: 0 auto;
 	padding: 30px;
 	/*position: absolute; */
 	border-radius: 20px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+
 
 }
 
@@ -69,11 +91,33 @@ header {
 	  float: right;
 }
 
-.home-right { float: right;}
+
+#head-logo {
+	width: 100px;
+
+}
+
+#point-logo-top {
+	width: 30px;
+	display: inline-block;
+}
+
+
+
+
+
+.home-right { 
+	float: right;
+
+	
+}
 
 div .center {
 	text-align: center;
 }
+/*///////*/
+
+
 
 .transparent {
 	background-color: rgba(200, 200, 200, 0.7);
