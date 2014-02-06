@@ -15,8 +15,8 @@ var mapnificent, urbanDistance, positions = {};
 var latlng_array = []
 
 var get_coordinates = function(){
-  var coordinate_array = coordinates[coordinates.length-1]
-  $.each(coordinate_array, function(index, coordinates){
+  var midpoint_blobs = coordinates[coordinates.length-1]
+  $.each(midpoint_blobs, function(index, coordinates){
     var midx = coordinates.midx;
     var midy = coordinates.midy;
     var sqkm = coordinates.sqkm;
@@ -54,6 +54,7 @@ function get_midpoint(){
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
       that.bind("setup", function(){
+        alert('testing' + minutes + 'minutes');
         var intersect = that.getOption("intersect");
         that.setOption("intersection", true);
         console.log("setup complete");
@@ -67,8 +68,9 @@ function get_midpoint(){
       });
 
       that.bind("dataLoaded", function(){
-        $.each(submit_stuff, function(index, stuff){
-          var geopos = {lat: stuff.latitude, lng: stuff.longitude};
+        console.log(coordinates_array);
+        $.each(coordinates_array, function(index, coordinate){
+          var geopos = {lat: coordinate.latitude, lng: coordinate.longitude};
           var time = minutes * 60
           var pos = that.addPosition(geopos, time);
           positions[pos.index] = {position: pos, latlng: geopos};
@@ -92,7 +94,7 @@ function get_midpoint(){
 
       that.bind("calculationDone", function(position){
         $('#loading').text("Calculation Done!");
-        console.log("calc finished")
+        console.log("calc finished");
         mapnificent.trigger('redraw');
         getBlobs();
       });
@@ -101,7 +103,7 @@ function get_midpoint(){
         var blobs = that.search.detectBlobs();
         i += 1;
         coordinates.push(blobs);
-        if (i === Object.keys(submit_stuff).length) {
+        if (i === Object.keys(coordinates_array).length) {
           get_coordinates();
           if (latlng_array.length === 0){
             minutes +=5;
@@ -137,31 +139,7 @@ function get_midpoint(){
   };
 };
 
-
-$(document).ready(function(){
-
-  addAutocomplete('.location');
-
-  function Location(latitude, longtitude){
-    this.latitude = latitude;
-    this.longtitude = longtitude;
-  }
-
-  function addAutocomplete(location){
-    coordinates_array = []
-
-  $(location).geocomplete().bind("geocode:result", function(event, result){
-    var latitude = result.geometry.location.d;
-    var longitude = result.geometry.location.e;
-    $('#search-midpoint').click(function(){
-      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e))
-    })
-    console.log(coordinates_array);
-  });
-
-  }
-
-  $('.add-friend').click(function(){
+function appendInput(){
   var input = "<input class='location'>"
   var inputs = $('.location');
   var last_input = inputs.last();
@@ -170,9 +148,48 @@ $(document).ready(function(){
   var new_last_input = $('.location').last();
   $("<button class='add-friend'>Add</button>").insertAfter(new_last_input);
   addAutocomplete(new_last_input);
+     $('.add-friend').click(function(){
+    appendInput();
+  })
+}
+
+function Location(latitude, longitude){
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
+
+    
+    
+function addAutocomplete(location){
+  $(location).geocomplete().bind("geocode:result", function(event, result){
+    var latitude = result.geometry.location.d;
+    var longitude = result.geometry.location.e;
+    $('#search-midpoint').click(function(){
+      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e))
+      initialize()
+;    })
+    console.log(coordinates_array);
+  });
+}
+
+  coordinates_array = []
+
+$(document).ready(function(){
+
+  addAutocomplete('.location');
+
+   $('.add-friend').click(function(){
+    appendInput();
   })
 
+
 });
+
+
+
+
+
+
 
 
 
