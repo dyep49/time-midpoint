@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="center">
-		<%= image_tag "mid.png", :id => "logo"%>
-    <%= image_tag "point.png", :id => "logo"%>
+		<div><%= image_tag "mid.png", :id => "logo"%></div>
+    <div class = "animated bounce" id = "logo1"><%= image_tag "point.png"%></div>
 		<%= button_to "Register", new_user_registration_path, :class => "btn btn-primary btn-lg", :method => "get" %>
 		<%= button_to "Sign in", new_user_session_path, :class => "btn btn-primary btn-sm" %>
 	</div>
