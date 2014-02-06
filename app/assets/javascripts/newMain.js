@@ -135,9 +135,14 @@ function get_midpoint(){
       if(options == null){
         return;
       }
-      if (distances_array.max() > 5) {
-        minutes = 15
+      alert(distances_array.max());
+      if (distances_array.max() > 10) {
+        minutes = 15;
       };
+
+      if (distances_array.max() <= 1) {
+        minutes = 5;
+      }
       mapnificent = Mapnificent(options);
       mapnificent.addLayer("urbanDistance", UrbanDistanceUI);
       mapnificent.bind("initDone", function(){
@@ -230,9 +235,15 @@ distances_array = []
 
 function callback(response, status){
   var distance = response.rows[0].elements[0].distance.text;
-  var parsed_distance = distance.match(/\d*[.]\d*/g)
-  if (parsed_distance === null) {
-    parsed_distance = distance.match(/\d+/g);
+  console.log(distance);
+  if (distance.match(/(km)/) === null) {
+    parsed_distance = "0"
+  }
+  else {
+    var parsed_distance = distance.match(/\d*[.]\d*/g)
+    if (parsed_distance === null) {
+      parsed_distance = distance.match(/\d+/g);
+    } 
   }
   var distance_float = parseFloat(parsed_distance[0])
   distances_array.push(distance_float);
