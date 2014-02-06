@@ -1,4 +1,4 @@
-function fetchAllLocations(){
+ function fetchAllLocations(){
   $.ajax({
     url: "/locations",
     type: "get",
@@ -32,6 +32,7 @@ var Location = function(tag, address, id){
             }
         });
       };
+      
       this.geocode();
 
 self.create = function(){
