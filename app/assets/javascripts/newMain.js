@@ -170,9 +170,10 @@ function addAutocomplete(location){
     var longitude = result.geometry.location.e;
     $('#search-midpoint').click(function(){
       coordinates_array.push(new MyLocation(result.geometry.location.d, result.geometry.location.e));
+      console.log(coordinates_array);
       activity = $('.activity').val();
       initialize();
-;    })
+    })
     console.log(coordinates_array);
   });
 }
