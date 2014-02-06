@@ -23,6 +23,10 @@ var YelpLocation = function(object){
     this.rating = object.rating || null;
     this.image_url = object.image_url || null;
     this.rating_img = object.rating_img_url_small || null;
+    this.mobile_url = object.mobile_url || null;
+    this.review_count = object.review_count || null;
+    this.phone = object.phone || null;
+    this.snippet_text = object.snippet_text || null;
 
     this.geocode = function() {
         var geocoder = new google.maps.Geocoder();

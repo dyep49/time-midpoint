@@ -12,8 +12,8 @@ header {
 }
 
 body {
-	background: url(nyvintage.jpg) no-repeat center center fixed; 
-	
+	background: url(nyvintage.jpg) no-repeat center center fixed;
+
  /*filter: alpha(opacity=40);*/
 }
 
@@ -31,15 +31,15 @@ body {
 
 	/*background-color: #D99C2B;*/
 	background-color: rgba(217, 156, 43, 0.8);
-	margin: 5%;
-	width: 100%;
+	/*margin: 5%;*/
+	/*width: 100%;*/
 	padding: 30px;
 	/*position: absolute; */
 	border-radius: 20px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
-	
+
 }
 
 .input {
@@ -110,14 +110,22 @@ body {
 
 
 
-.home-right { 
+.home-right {
 	float: right;
 
-	
+
+}
+
+
+  /* LANDING PAGE*/
+
+#landing-buttons {
+	margin-left: 90px;
 }
 
 .center {
 	margin: 0 auto;
+	margin-top: 100px;
 	width: 60%;
 }
 
@@ -126,6 +134,8 @@ body {
  			
      display: inline-block;
 }
+
+
 /*///////*/
 
 
@@ -138,7 +148,7 @@ body {
 }
 
 .landing-background {
-	background: url(nyvintage.jpg) no-repeat center center fixed; 
+	background: url(nyvintage.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -171,25 +181,19 @@ body {
 	margin-top: 8px;
 }
 
-
-.row {
-		margin-top: -50px;
-	width: 50%;
-	margin: 0 auto;
-	padding: 30px;
-}
-
 .sign-up {
 	background-color: #D99C2B;
-/*	position: absolute;*/
-
-	margin: auto 0;
+	position: relative;
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 100px;
+	
 	padding: 30px;
 	border-radius: 20px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
-
 }
 
 .submit-button {

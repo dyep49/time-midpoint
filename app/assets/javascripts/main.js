@@ -56,12 +56,18 @@ YELP = function(ll, category) {
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
                 console.log(data);
+
+                
+                
                 data.businesses.forEach(function(business) {
                     // we do this because the yelp id is not the id we want to use
                     // in the Location constructor
                     delete business["id"];
                     //var location_view = new LocationView( business );
-                    new YelpLocation(business);
+                    var yelp_model = new YelpLocation(business);
+                    var yelp_view = new YelpView(yelp_model);
+                    yelp_view.render();
+
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
