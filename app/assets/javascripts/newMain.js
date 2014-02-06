@@ -1,3 +1,7 @@
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+
 var map_div = $('#map')[0]
 var mapOptions = {
   mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -8,11 +12,15 @@ var mapOptions = {
 var map = new google.maps.Map(map_div, mapOptions);
 
 var coordinates = [];
-var minutes = 10;
+
 
 var mapnificent, urbanDistance, positions = {};
 
 var latlng_array = []
+
+var activity;
+
+var max_distance;
 
 var get_coordinates = function(){
   var midpoint_blobs = coordinates[coordinates.length-1]
@@ -46,17 +54,15 @@ function get_midpoint(){
   return largest_blob.lat.toString() + "," + largest_blob.lng.toString()
 };
 
+    var minutes = 10;
 
 
   function initialize(){
     var i = 0
-    find_max_distance();
-    console.log(distances_array);
-
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
       that.bind("setup", function(){
-        alert('testing' + minutes + 'minutes');
+        console.log('testing' + minutes + 'minutes');
         var intersect = that.getOption("intersect");
         that.setOption("intersection", true);
         console.log("setup complete");
@@ -118,7 +124,7 @@ function get_midpoint(){
             mapnificent.destroy();
             $('#map').remove();
             $('iframe').remove();
-            YELP(coordinate_string, 'cafe')();
+            YELP(coordinate_string, activity)();
           };
         };
       };
@@ -129,13 +135,19 @@ function get_midpoint(){
       if(options == null){
         return;
       }
+      console.log(distances_array.max());
+      if (distances_array.max() > 10) {
+        minutes = 15;
+      };
 
+      if (distances_array.max() <= 1) {
+        minutes = 5;
+      }
       mapnificent = Mapnificent(options);
       mapnificent.addLayer("urbanDistance", UrbanDistanceUI);
       mapnificent.bind("initDone", function(){
         // mapnificent.hide();
       });
-
       mapnificent.addToMap(map);
     });
   };
@@ -155,7 +167,7 @@ function appendInput(){
   })
 }
 
-function Location(latitude, longitude){
+function My_Location(latitude, longitude){
     this.latitude = latitude;
     this.longitude = longitude;
   }
@@ -167,9 +179,11 @@ function addAutocomplete(location){
     var latitude = result.geometry.location.d;
     var longitude = result.geometry.location.e;
     $('#search-midpoint').click(function(){
-      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e))
-      initialize()
-;    })
+      coordinates_array.push(new My_Location(result.geometry.location.d, result.geometry.location.e));
+      activity = $('.activity').val();
+      find_max_distance();
+      initialize();
+    })
     console.log(coordinates_array);
   });
 }
@@ -221,9 +235,15 @@ distances_array = []
 
 function callback(response, status){
   var distance = response.rows[0].elements[0].distance.text;
-  var parsed_distance = distance.match(/\d*[.]\d*/g)
-  if (parsed_distance === null) {
-    parsed_distance = distance.match(/\d+/g);
+  console.log(distance);
+  if (distance.match(/(km)/) === null) {
+    parsed_distance = "0"
+  }
+  else {
+    var parsed_distance = distance.match(/\d*[.]\d*/g)
+    if (parsed_distance === null) {
+      parsed_distance = distance.match(/\d+/g);
+    } 
   }
   var distance_float = parseFloat(parsed_distance[0])
   distances_array.push(distance_float);
