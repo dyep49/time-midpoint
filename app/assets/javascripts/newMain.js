@@ -157,7 +157,7 @@ function appendInput(){
   })
 }
 
-function Location(latitude, longitude){
+function My_Location(latitude, longitude){
     this.latitude = latitude;
     this.longitude = longitude;
   }
@@ -169,7 +169,7 @@ function addAutocomplete(location){
     var latitude = result.geometry.location.d;
     var longitude = result.geometry.location.e;
     $('#search-midpoint').click(function(){
-      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e));
+      coordinates_array.push(new My_Location(result.geometry.location.d, result.geometry.location.e));
       activity = $('.activity').val();
       initialize();
 ;    })
