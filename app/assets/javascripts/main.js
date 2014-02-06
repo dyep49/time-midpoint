@@ -145,12 +145,12 @@ var Map = function(ll) {
                 map: google_map,
                 animation: google.maps.Animation.DROP
             });
+            // var street_address_pattern = new RegExp(/ (.+)\(/ );
+            //  var street_address = app.locations[iterator].address.match( street_address_pattern )[1];
 
-//            var street_address_pattern = new RegExp(/ (.+)\(/ );
-//            var street_address = app.locations[iterator].address.match( street_address_pattern )[1];
 
-//            var city_state_zip_pattern = new RegExp(/[a-zA-Z0-9]+,.+/);
-//            var city_state_zip = app.locations[iterator].address.match( city_state_zip_pattern )[0];
+            // var city_state_zip_pattern = new RegExp(/[a-zA-Z0-9]+,.+/);
+            // var city_state_zip = app.locations[iterator].address.match( city_state_zip_pattern )[0];
 
             var content_string = [
                 "<div class='infowindow'>",
@@ -159,12 +159,12 @@ var Map = function(ll) {
                 "</h4>",
                 "<img class='rating-pic' src='" + app.locations[iterator].rating_img + "'>",
                 "<img class='yelp-pic' src='" + app.locations[iterator].image_url + "'>",
-//                "<p class='street_address'>",
-  //              street_address,
-//                "</p>",
-//                "<p class='city_state_zip_address'>",
-//                city_state_zip,
-//                "</p>",
+                //                "<p class='street_address'>",
+                //              street_address,
+                //                "</p>",
+                //                "<p class='city_state_zip_address'>",
+                //                city_state_zip,
+                //                "</p>",
                 "</div>"
             ];
 
