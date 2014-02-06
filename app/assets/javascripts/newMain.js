@@ -1,3 +1,7 @@
+Array.prototype.max = function() {
+  return Math.max.apply(null, this);
+};
+
 var map_div = $('#map')[0]
 var mapOptions = {
   mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -8,13 +12,15 @@ var mapOptions = {
 var map = new google.maps.Map(map_div, mapOptions);
 
 var coordinates = [];
-var minutes = 10;
+
 
 var mapnificent, urbanDistance, positions = {};
 
 var latlng_array = []
 
-var activity = ''
+var activity;
+
+var max_distance;
 
 var get_coordinates = function(){
   var midpoint_blobs = coordinates[coordinates.length-1]
@@ -48,13 +54,11 @@ function get_midpoint(){
   return largest_blob.lat.toString() + "," + largest_blob.lng.toString()
 };
 
+    var minutes = 10;
 
 
   function initialize(){
     var i = 0
-    find_max_distance();
-    console.log(distances_array);
-
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
       that.bind("setup", function(){
@@ -131,13 +135,14 @@ function get_midpoint(){
       if(options == null){
         return;
       }
-
+      if (distances_array.max() > 5) {
+        minutes = 15
+      };
       mapnificent = Mapnificent(options);
       mapnificent.addLayer("urbanDistance", UrbanDistanceUI);
       mapnificent.bind("initDone", function(){
         // mapnificent.hide();
       });
-
       mapnificent.addToMap(map);
     });
   };
@@ -171,8 +176,9 @@ function addAutocomplete(location){
     $('#search-midpoint').click(function(){
       coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e));
       activity = $('.activity').val();
+      find_max_distance();
       initialize();
-;    })
+    })
     console.log(coordinates_array);
   });
 }
