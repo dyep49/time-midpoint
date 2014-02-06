@@ -102,7 +102,11 @@ body {
 	display: inline-block;
 }
 
-
+#logo1 {
+    -vendor-animation-duration: 3s;
+    -vendor-animation-delay: 2s;
+    -vendor-animation-iteration-count: infinite;
+}
 
 
 
@@ -112,8 +116,15 @@ body {
 	
 }
 
-div .center {
-	text-align: center;
+.center {
+	margin: 0 auto;
+	width: 60%;
+}
+
+.center div {
+		text-align: center;
+ 			
+     display: inline-block;
 }
 /*///////*/
 
