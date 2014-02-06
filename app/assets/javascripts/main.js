@@ -114,12 +114,25 @@ var Map = function(ll) {
     };
 
     this.renderMagnificentMarker = function() {
-        var new_marker = new google.maps.Marker({
+
+        var midpoint_marker = new google.maps.Marker({
             position: new google.maps.LatLng( self.magnificent_lat, self.magnificent_lon ),
             map: google_map,
             animation: google.maps.Animation.DROP,
+//            icon: "/point.png"
             icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|009ACD"
             });
+
+        google.maps.event.addListener(midpoint_marker, 'click', toggleBounce);
+
+        function toggleBounce() {
+            if (midpoint_marker.getAnimation() != null) {
+                midpoint_marker.setAnimation(null);
+            } else {
+                midpoint_marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        }
+
     };
 
     this.renderMarkers = function() {
@@ -133,6 +146,12 @@ var Map = function(ll) {
                 animation: google.maps.Animation.DROP
             });
 
+            var street_address_pattern = new RegExp(/ (.+)\(/ );
+            var street_address = app.locations[iterator].address.match( street_address_pattern )[1];
+
+            var city_state_zip_pattern = new RegExp(/[a-zA-Z0-9]+,.+/);
+            var city_state_zip = app.locations[iterator].address.match( city_state_zip_pattern )[0];
+
             var content_string = [
                 "<div class='infowindow'>",
                 "<h4>",
@@ -140,6 +159,12 @@ var Map = function(ll) {
                 "</h4>",
                 "<img class='rating-pic' src='" + app.locations[iterator].rating_img + "'>",
                 "<img class='yelp-pic' src='" + app.locations[iterator].image_url + "'>",
+                "<p class='street_address'>",
+                street_address,
+                "</p>",
+                "<p class='city_state_zip_address'>",
+                city_state_zip,
+                "</p>",
                 "</div>"
             ];
 

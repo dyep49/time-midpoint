@@ -1,4 +1,3 @@
-
 var map_div = $('#map')[0]
 var mapOptions = {
   mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -113,7 +112,7 @@ function get_midpoint(){
           else {
             var coordinate_string = get_midpoint();
             mapnificent.destroy();
-            // $('#map').remove();
+            $('#map').remove();
             $('iframe').remove();
             YELP(coordinate_string, 'cafe')();
           };
