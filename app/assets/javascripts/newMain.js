@@ -202,34 +202,6 @@ $(document).ready(function(){
 });
 
 
-
-
-
-
-
-
-
-
-
-// var inputs = $('.location')
-
-// coordinates_array = []
-
-// function fetchLocations(locationInputs){
-//   $.each(locationInputs, function(index, input){
-//     console.log(input);
-//     input = input.val();
-
-
-
-//   })
-// }
-
-
-// var friendLocation = $("#friend-location");
-
-
-
 distances_array = []
 
 
