@@ -62,7 +62,7 @@ function get_midpoint(){
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
       that.bind("setup", function(){
-        alert('testing' + minutes + 'minutes');
+        console.log('testing' + minutes + 'minutes');
         var intersect = that.getOption("intersect");
         that.setOption("intersection", true);
         console.log("setup complete");
@@ -135,7 +135,7 @@ function get_midpoint(){
       if(options == null){
         return;
       }
-      alert(distances_array.max());
+      console.log(distances_array.max());
       if (distances_array.max() > 10) {
         minutes = 15;
       };
