@@ -14,6 +14,8 @@ var mapnificent, urbanDistance, positions = {};
 
 var latlng_array = []
 
+var activity = ''
+
 var get_coordinates = function(){
   var midpoint_blobs = coordinates[coordinates.length-1]
   $.each(midpoint_blobs, function(index, coordinates){
@@ -118,7 +120,7 @@ function get_midpoint(){
             mapnificent.destroy();
             $('#map').remove();
             $('iframe').remove();
-            YELP(coordinate_string, 'cafe')();
+            YELP(coordinate_string, activity)();
           };
         };
       };
@@ -167,8 +169,9 @@ function addAutocomplete(location){
     var latitude = result.geometry.location.d;
     var longitude = result.geometry.location.e;
     $('#search-midpoint').click(function(){
-      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e))
-      initialize()
+      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e));
+      activity = $('.activity').val();
+      initialize();
 ;    })
     console.log(coordinates_array);
   });
