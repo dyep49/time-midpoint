@@ -50,6 +50,8 @@ function get_midpoint(){
 
   function initialize(){
     var i = 0
+    find_max_distance();
+    console.log(distances_array);
 
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
@@ -140,7 +142,7 @@ function get_midpoint(){
 };
 
 function appendInput(){
-  var input = "<input class='location'>"
+  var input = "<input class='location input form-control'>"
   var inputs = $('.location');
   var last_input = inputs.last();
   $(input).insertAfter(".add-friend");
@@ -214,26 +216,35 @@ $(document).ready(function(){
 
 
 
+distances_array = []
 
 
+function callback(response, status){
+  var distance = response.rows[0].elements[0].distance.text;
+  var parsed_distance = distance.match(/\d*[.]\d*/g)
+  if (parsed_distance === null) {
+    parsed_distance = distance.match(/\d+/g);
+  }
+  var distance_float = parseFloat(parsed_distance[0])
+  distances_array.push(distance_float);
+}
 
-// function callback(response, status){
-//   console.log(response.rows[0].elements[0].distance.text)
-// }
-
-// var user_lat = submit_stuff.user.latitude; 
-// var user_lng = submit_stuff.user.longitude;
-// var friend_lat = submit_stuff.friend.latitude; 
-// var friend_lng = submit_stuff.friend.longitude;
-// var origin = new google.maps.LatLng(user_lat, user_lng);
-// var destination = new google.maps.LatLng(friend_lat, friend_lng);
-// var service = new google.maps.DistanceMatrixService();
-// service.getDistanceMatrix(
-//   {
-//     origins: [origin],
-//     destinations: [destination],
-//     travelMode: google.maps.TravelMode.WALKING,
-//     unitSystem: google.maps.UnitSystem.METRIC,
-//     avoidHighways: false,
-//     avoidTolls: false
-//   }, callback);
+function find_max_distance(){
+  $.each(coordinates_array, function(index, coordinates){
+    var coordinates = coordinates;
+    $.each(coordinates_array, function(index, other_coordinates){
+      var origin = new google.maps.LatLng(coordinates.latitude, coordinates.longitude)
+      var destination = new google.maps.LatLng(other_coordinates.latitude, other_coordinates.longitude);
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [origin],
+          destinations: [destination],
+          travelMode: google.maps.TravelMode.WALKING,
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false
+        }, callback);
+    });
+  });
+}
