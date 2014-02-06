@@ -1,4 +1,4 @@
-<div class = "sign in">
+<div class = "sign-up">
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
@@ -29,7 +29,7 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password %></div>
 
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.submit "Update", class: "btn btn-primary btn-lg"  %></div>
 <% end %>
 
 <h3>Cancel my account</h3>

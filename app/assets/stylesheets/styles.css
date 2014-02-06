@@ -114,10 +114,12 @@ body {
 	float: right;
 
 
+
 }
 
 .center {
 	margin: 0 auto;
+	margin-top: 100px;
 	width: 60%;
 }
 
@@ -126,6 +128,8 @@ body {
  			
      display: inline-block;
 }
+
+
 /*///////*/
 
 
@@ -173,8 +177,12 @@ body {
 
 .sign-up {
 	background-color: #D99C2B;
-	position: absolute;
-	margin: 5%;
+	position: relative;
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 100px;
+	
 	padding: 30px;
 	border-radius: 20px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
