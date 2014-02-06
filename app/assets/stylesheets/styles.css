@@ -31,8 +31,8 @@ body {
 
 	/*background-color: #D99C2B;*/
 	background-color: rgba(217, 156, 43, 0.8);
-	/*margin: 5%;*/
-	/*width: 100%;*/
+	margin: 5%;
+	width: 100%;
 	padding: 30px;
 	/*position: absolute; */
 	border-radius: 20px;
@@ -171,15 +171,25 @@ body {
 	margin-top: 8px;
 }
 
+
+.row {
+		margin-top: -50px;
+	width: 50%;
+	margin: 0 auto;
+	padding: 30px;
+}
+
 .sign-up {
 	background-color: #D99C2B;
-	position: absolute;
-	margin: 5%;
+/*	position: absolute;*/
+
+	margin: auto 0;
 	padding: 30px;
 	border-radius: 20px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
+
 }
 
 .submit-button {
