@@ -91,6 +91,15 @@ body {
 	  float: right;
 }
 
+#table-head {
+	font-size: 40px;
+	text-align: center;
+	color: white;
+}
+
+.table {
+	background-color: #7E8AA2;
+}
 
 #head-logo {
 	width: 100px;
@@ -108,12 +117,12 @@ body {
     -vendor-animation-iteration-count: infinite;
 }
 
-
+#landing-buttons {
+	margin-left: 150px;
+}
 
 .home-right {
 	float: right;
-
-
 
 }
 
