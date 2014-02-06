@@ -139,44 +139,44 @@ function get_midpoint(){
 
 
 $(document).ready(function(){
-var button = $('#search-midpoint');
-var userLocation = $("#user-location");
-var friendLocation = $("#friend-location");
-var userCoordinate = {};
-var friendCoordinate = {};
-$(userLocation).geocomplete().bind("geocode:result", function(event, result){
-  var latitude = result.geometry.location.d;
-  var longitude = result.geometry.location.e;
-    var locationInput = {};
-    userCoordinate.latitude = latitude;
-    userCoordinate.longitude = longitude;
-    console.log(userCoordinate);
-});
-$(friendLocation).geocomplete().bind("geocode:result", function(event, result){
-  var latitude = result.geometry.location.d;
-  var longitude = result.geometry.location.e;
-  friendCoordinate.latitude = latitude;
-  friendCoordinate.longitude = longitude;
-  console.log(friendCoordinate);
-});
 
-submit_stuff = {};
-submit_stuff.user = userCoordinate;
-submit_stuff.friend = friendCoordinate;
+  addAutocomplete('.location');
 
+  function Location(latitude, longtitude){
+    this.latitude = latitude;
+    this.longtitude = longtitude;
+  }
 
-  $('#search-midpoint').click(function(){
-     initialize();
+  function addAutocomplete(location){
+    coordinates_array = []
+
+  $(location).geocomplete().bind("geocode:result", function(event, result){
+    var latitude = result.geometry.location.d;
+    var longitude = result.geometry.location.e;
+    $('#search-midpoint').click(function(){
+      coordinates_array.push(new Location(result.geometry.location.d, result.geometry.location.e))
+    })
+    console.log(coordinates_array);
+  });
+
+  }
+
+  $('.add-friend').click(function(){
+  var input = "<input class='location'>"
+  var inputs = $('.location');
+  var last_input = inputs.last();
+  $(input).insertAfter(".add-friend");
+  $('.add-friend').remove();
+  var new_last_input = $('.location').last();
+  $("<button class='add-friend'>Add</button>").insertAfter(new_last_input);
+  addAutocomplete(new_last_input);
   })
+
 });
 
 
 
 
-// function Location(latitude, longtitude){
-//   this.latitude = latitude;
-//   this.longtitude = longtitude;
-// }
 
 // var inputs = $('.location')
 
