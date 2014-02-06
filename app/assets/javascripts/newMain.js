@@ -1,3 +1,4 @@
+
 var map_div = $('#map')[0]
 var mapOptions = {
   mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -8,7 +9,7 @@ var mapOptions = {
 var map = new google.maps.Map(map_div, mapOptions);
 
 var coordinates = [];
-var minutes = 10;        
+var minutes = 10;
 
 var mapnificent, urbanDistance, positions = {};
 
@@ -33,8 +34,8 @@ function get_midpoint(){
     if (largest_blob.length === 0)
       {
         largest_blob = latlng;
-      } 
-    else if (latlng.sqkm > largest_blob.sqkm) 
+      }
+    else if (latlng.sqkm > largest_blob.sqkm)
       {
         largest_blob = latlng;
       }
@@ -57,7 +58,6 @@ function get_midpoint(){
         var intersect = that.getOption("intersect");
         that.setOption("intersection", true);
         console.log("setup complete");
-        alert("Testing" + minutes + "minutes");
       });
 
       that.bind("loadProgress", function(progress){
@@ -113,10 +113,9 @@ function get_midpoint(){
           else {
             var coordinate_string = get_midpoint();
             mapnificent.destroy();
-            $('#map').remove();
+            // $('#map').remove();
             $('iframe').remove();
             YELP(coordinate_string, 'cafe')();
-            alert('yelp running');
           };
         };
       };
@@ -139,14 +138,8 @@ function get_midpoint(){
   };
 };
 
- 
-  $(document).ready(function(){
-    $('#search-midpoint').click(function(){
-      initialize();
-    })
-  });
 
-
+$(document).ready(function(){
 var button = $('#search-midpoint');
 var userLocation = $("#user-location");
 var friendLocation = $("#friend-location");
@@ -171,3 +164,60 @@ $(friendLocation).geocomplete().bind("geocode:result", function(event, result){
 submit_stuff = {};
 submit_stuff.user = userCoordinate;
 submit_stuff.friend = friendCoordinate;
+
+
+  $('#search-midpoint').click(function(){
+     initialize();
+  })
+});
+
+
+
+
+// function Location(latitude, longtitude){
+//   this.latitude = latitude;
+//   this.longtitude = longtitude;
+// }
+
+// var inputs = $('.location')
+
+// coordinates_array = []
+
+// function fetchLocations(locationInputs){
+//   $.each(locationInputs, function(index, input){
+//     console.log(input);
+//     input = input.val();
+
+
+
+//   })
+// }
+
+
+// var friendLocation = $("#friend-location");
+
+
+
+
+
+
+// function callback(response, status){
+//   console.log(response.rows[0].elements[0].distance.text)
+// }
+
+// var user_lat = submit_stuff.user.latitude; 
+// var user_lng = submit_stuff.user.longitude;
+// var friend_lat = submit_stuff.friend.latitude; 
+// var friend_lng = submit_stuff.friend.longitude;
+// var origin = new google.maps.LatLng(user_lat, user_lng);
+// var destination = new google.maps.LatLng(friend_lat, friend_lng);
+// var service = new google.maps.DistanceMatrixService();
+// service.getDistanceMatrix(
+//   {
+//     origins: [origin],
+//     destinations: [destination],
+//     travelMode: google.maps.TravelMode.WALKING,
+//     unitSystem: google.maps.UnitSystem.METRIC,
+//     avoidHighways: false,
+//     avoidTolls: false
+//   }, callback);

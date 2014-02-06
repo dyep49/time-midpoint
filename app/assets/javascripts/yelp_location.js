@@ -17,11 +17,12 @@ var YelpLocation = function(object){
     var self = this;
     this.name = object.name || null;
     this.tag = object.tag || null;
-    this.address = object.address || object.location.display_address.join(" "); 
+    this.address = object.address || object.location.display_address.join(" ");
     this.id = object.id || null;
     this.distance_from_mid_meters = object.distance || null;
     this.rating = object.rating || null;
     this.image_url = object.image_url || null;
+    this.rating_img = object.rating_img_url_small || null;
 
     this.geocode = function() {
         var geocoder = new google.maps.Geocoder();
@@ -37,7 +38,7 @@ var YelpLocation = function(object){
     self.create = function(){
         var params = {
             location: {
-                
+
                 "address": self.address,
                 "long": self.lng,
                 "lat": self.lat,
