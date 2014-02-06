@@ -12,8 +12,8 @@ header {
 }
 
 body {
-	background: url(nyvintage.jpg) no-repeat center center fixed; 
-	
+	background: url(nyvintage.jpg) no-repeat center center fixed;
+
  /*filter: alpha(opacity=40);*/
 }
 
@@ -39,7 +39,7 @@ body {
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.49);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.49);
-	
+
 }
 
 .input {
@@ -110,10 +110,10 @@ body {
 
 
 
-.home-right { 
+.home-right {
 	float: right;
 
-	
+
 }
 
 .center {
@@ -138,7 +138,7 @@ body {
 }
 
 .landing-background {
-	background: url(nyvintage.jpg) no-repeat center center fixed; 
+	background: url(nyvintage.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
