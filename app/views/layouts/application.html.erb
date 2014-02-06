@@ -17,13 +17,20 @@
         
           <% if user_signed_in? %>
           <header>
-            <div class="links"><strong>Hi, <%= current_user.first_name%></strong></div>
-          <ul class= "nav nav-tabs home-right">
-            <li class="links"><%= link_to 'Edit profile', edit_user_registration_path %></li>
-            <li class = "links"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-          </ul>
+            
+          <div class = "nav-logo"><%= image_tag "mid.png", :id => "head-logo"%>
+              <%= image_tag "point.png", :id => "point-logo-top"%></div>
+           
 
+            </ul>
+            <div class="links"><strong>Hi, <%= current_user.first_name%></strong></div>
+            <ul class= "nav nav-tabs home-right">
+            <li class="links"><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+            <li class = "links"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <li class="links"><%= link_to 'Home', root_path %></li>
+          </ul>
         </header>
+
       <% end %>
 
         <div class="row">
@@ -31,9 +38,10 @@
         </div>
       </div>
     </div>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
   </body>
     <%= javascript_include_tag "application" %>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="http://www.mapnificent.net/media/api/1/mapnificent.js" type="text/javascript" charset="utf-8"></script>
+
 
 </html>
