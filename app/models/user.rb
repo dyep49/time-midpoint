@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates_presence_of :first_name, :last_name
+
+  has_many :locations
 end

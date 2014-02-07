@@ -6,7 +6,11 @@ var map_div = $('#map')[0]
 var mapOptions = {
   mapTypeId: google.maps.MapTypeId.ROADMAP,
   zoom: 12,
-  center: new google.maps.LatLng(40.7577, -73.9857)
+  center: new google.maps.LatLng(40.7577, -73.9857),
+  disableDefaultUI: true,
+  disableDoubleClickZoom: true,
+  draggable: false,
+  scrollwheel: false
 };
 
 var map = new google.maps.Map(map_div, mapOptions);
@@ -122,9 +126,10 @@ function get_midpoint(){
           else {
             var coordinate_string = get_midpoint();
             mapnificent.destroy();
-            $('#map').remove();
-            $('iframe').remove();
+             $('#map').remove();
+             $('iframe').remove();
             YELP(coordinate_string, activity)();
+            $('#results_map').fadeIn("slow");
           };
         };
       };
@@ -179,10 +184,23 @@ function addAutocomplete(location){
     var latitude = result.geometry.location.d;
     var longitude = result.geometry.location.e;
     $('#search-midpoint').click(function(){
+      var inputDiv = $('.input-container').children();
       coordinates_array.push(new My_Location(result.geometry.location.d, result.geometry.location.e));
       activity = $('.activity').val();
       find_max_distance();
       initialize();
+
+    // fades out slowly
+
+      inputDiv.slideUp()
+      
+
+      //We need to see how to show it without lagging
+
+      setTimeout(function() {
+      $('#calc-map').slideDown();
+      }, 5000);
+      
     })
     console.log(coordinates_array);
   });
@@ -192,6 +210,10 @@ function addAutocomplete(location){
 
 $(document).ready(function(){
 
+  //Hides everything excep input field
+
+  $('#calc-map').hide();
+
   addAutocomplete('.location');
 
    $('.add-friend').click(function(){
@@ -200,34 +222,6 @@ $(document).ready(function(){
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-// var inputs = $('.location')
-
-// coordinates_array = []
-
-// function fetchLocations(locationInputs){
-//   $.each(locationInputs, function(index, input){
-//     console.log(input);
-//     input = input.val();
-
-
-
-//   })
-// }
-
-
-// var friendLocation = $("#friend-location");
-
 
 
 distances_array = []

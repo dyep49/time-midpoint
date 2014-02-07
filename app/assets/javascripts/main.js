@@ -111,7 +111,8 @@ var Map = function(ll) {
 
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 14
+            zoom: 14m
+            disableDefaultUI: true
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
         app.elements.$results_map_div.css("height", "500px");
