@@ -227,3 +227,7 @@ header {
 	margin-top: 0px;
 	text-align: center;
 }
+
+.yelp-table a {
+	font-size: 14px;
+}
