@@ -98,7 +98,7 @@ self.create = function(){
 
 
 
-//Favorite button dropdown
+//Favorite add Button
 
 
 $('.add-favorite').click(function(event){
@@ -109,7 +109,7 @@ $('.add-favorite').click(function(event){
   var params = {
     "tag": tag,
     "address": valueInput
-  }
+  } 
 
   $.ajax({
     url: "/locations",
