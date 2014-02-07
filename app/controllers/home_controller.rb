@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+
 class HomeController < ApplicationController
   #before_filter :authenticate_user!
 
@@ -23,5 +25,11 @@ def text
     })
     render json: "{}"
 end 
+
+def sendhub
+  sh = SendHub.new("f9da674cef0f0664f9093be9fb521b522e3315c4", "7039671883")
+  sh.post_messages({:number => 17039671883, :text => "Testing"})
+  redirect_to :root
+end
 
 end

@@ -31,7 +31,7 @@ var YelpView = function(model){
 
     $('.text-button').click(function(){
       var phone = window.prompt("Enter Phone Number");
-      var t = new api.TMessage(phone, "This works!");
+      var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
       console.log(phone);
       t.tmessage();
     })

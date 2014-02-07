@@ -11,6 +11,8 @@ gem 'twilio-ruby'
 
 gem 'httparty'
 
+gem 'ruby-sendhub'
+
 gem 'pry'
 gem 'pry-rails'
 gem 'geocoder'

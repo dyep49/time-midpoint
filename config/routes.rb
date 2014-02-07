@@ -11,4 +11,6 @@ TimeMidpoint::Application.routes.draw do
 
   get '/text', to: "home#text"
 
+  get '/sendhub', to: "home#sendhub"
+
 end
