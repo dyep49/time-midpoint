@@ -8,10 +8,21 @@ class LocationsController < ApplicationController
   #     format.html { @locations = Location.all }
   #     format.json { render json: Location.all }
   #   end
-  # end 
+  # end
+
+    def index
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: Location.all.to_json
+      end
+    end
+  end
+
 
   def create
         current_location = Location.create(address: params[:address], tag: params[:tag])
+        current_user.locations << current_location
         render json: current_location.to_json
         # redirect_to '/'
   end 
