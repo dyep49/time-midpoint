@@ -99,6 +99,7 @@ self.create = function(){
 
 
 //Favorite add Button
+//CREATE
 
 
 $('.add-favorite').click(function(event){
@@ -115,10 +116,34 @@ $('.add-favorite').click(function(event){
     url: "/locations",
     dataType:'json',
     method: 'post',
-    data: params
+    data: params,
+    success: function(){
+      updateOption();
+    }
     })
     
   })
 
 
+//SHOW
+// $(some button).click(function(event){
+function updateOption(){
+  $('select').change(function(event){
+    var input = $(this).prev().prev()
+    var value = $(this).val();
+    $(input).val(value);
+  });
 
+  $.ajax({
+    url: "/locations",
+    dataType: 'json', 
+    method: 'get',
+    success: function(data){
+      $.each(data, function(index, favorite){
+        $('select').append("<option value='" + favorite.address + "'>" + favorite.tag + ": " + favorite.address + "</option>")
+      })
+    }
+  });
+}
+
+updateOption();
