@@ -62,6 +62,7 @@ function get_midpoint(){
 
 
   function initialize(){
+    $('.progress').show();
     var i = 0
 
     var UrbanDistanceUI = function(mapnificent, that, $, window, undefined){
@@ -93,7 +94,7 @@ function get_midpoint(){
       that.bind("calculationStarted", function(position){
         $('#loading').text("Starting calculation");
         $('#loading').fadeIn(1000);
-        $('#calc-map').fadeIn(3000);
+        // $('#calc-map').fadeIn(3000);
       });
 
       that.bind("calculationUpdated", function(position){
@@ -218,6 +219,7 @@ $(document).ready(function(){
   $('#calc-map').hide();
   $('#results_map').hide();
   $('table').hide();
+  $('.progress').hide();
 
   addAutocomplete('.location');
 
