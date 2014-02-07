@@ -111,7 +111,7 @@ var Map = function(ll) {
 
         var mapOptions = {
             center: new google.maps.LatLng( midpoint_lat, midpoint_lng ),
-            zoom: 14m
+            zoom: 14,
             disableDefaultUI: true
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
