@@ -7,6 +7,10 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 
+gem 'twilio-ruby'
+
+gem 'httparty'
+
 gem 'pry'
 gem 'pry-rails'
 gem 'geocoder'

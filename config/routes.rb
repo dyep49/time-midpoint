@@ -8,4 +8,7 @@ TimeMidpoint::Application.routes.draw do
   resources :locations
 
   resources :yelp_locations
+
+  get '/text', to: "home#text"
+
 end
