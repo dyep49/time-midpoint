@@ -165,8 +165,10 @@ function appendInput(){
   div_clone.insertAfter(last_div);
   var last_input = $('.location').last();
   addAutocomplete(last_input);
+  last_input.val('');
   setSelect();
   clickFavorite();
+
   $('.add-friend').click(function(){
     appendInput();
   })

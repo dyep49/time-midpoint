@@ -107,21 +107,22 @@ $('.add-favorite').click(function(event){
   var valueInput = $(event.target).prev('input').val();
   console.log(valueInput);
   tag = window.prompt("Name your location");
-  var params = {
-    "tag": tag,
-    "address": valueInput
-  } 
+  if (tag != null){
+    var params = {
+      "tag": tag,
+      "address": valueInput
+    } 
 
-  $.ajax({
-    url: "/locations",
-    dataType:'json',
-    method: 'post',
-    data: params,
-    success: function(){
-      updateOption();
-    }
-    })
-    
+    $.ajax({
+      url: "/locations",
+      dataType:'json',
+      method: 'post',
+      data: params,
+      success: function(){
+        updateOption();
+      }
+      })
+    }    
   })
 };
 
@@ -133,6 +134,8 @@ function updateOption(){
     dataType: 'json', 
     method: 'get',
     success: function(data){
+      $('option').remove();
+      $('select').append("<option>Favorites...</option>");
       $.each(data, function(index, favorite){
         $('select').append("<option value='" + favorite.address + "'>" + favorite.tag + ": " + favorite.address + "</option>")
       })
