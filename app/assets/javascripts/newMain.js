@@ -126,10 +126,10 @@ function get_midpoint(){
           else {
             var coordinate_string = get_midpoint();
             mapnificent.destroy();
-            $('#calc-map').slideUp( "slow");
-            // $('#map').remove();
-            // $('iframe').remove();
+             $('#map').remove();
+             $('iframe').remove();
             YELP(coordinate_string, activity)();
+            $('#results_map').fadeIn("slow");
           };
         };
       };
@@ -192,7 +192,15 @@ function addAutocomplete(location){
 
     // fades out slowly
 
-      inputDiv.fadeOut("slow");
+      inputDiv.slideUp()
+      
+
+      //We need to see how to show it without lagging
+
+      setTimeout(function() {
+      $('#calc-map').slideDown();
+      }, 5000);
+      
     })
     console.log(coordinates_array);
   });
@@ -201,6 +209,10 @@ function addAutocomplete(location){
   coordinates_array = []
 
 $(document).ready(function(){
+
+  //Hides everything excep input field
+
+  $('#calc-map').hide();
 
   addAutocomplete('.location');
 
