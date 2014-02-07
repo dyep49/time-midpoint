@@ -215,6 +215,8 @@ $(document).ready(function(){
   //Hides everything excep input field
 
   $('#calc-map').hide();
+  $('#results_map').hide();
+  $('table').hide();
 
   addAutocomplete('.location');
 
