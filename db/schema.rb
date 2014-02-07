@@ -11,15 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204202100) do
+ActiveRecord::Schema.define(:version => 20140201174445) do
 
   create_table "locations", :force => true do |t|
-    t.float    "long"
-    t.float    "lat"
     t.string   "tag"
+    t.string   "address"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "address"
   end
 
   create_table "users", :force => true do |t|
@@ -41,16 +39,5 @@ ActiveRecord::Schema.define(:version => 20140204202100) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "yelp_locations", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "rating"
-    t.string   "image_url"
-    t.float    "lat"
-    t.float    "long"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
 end
