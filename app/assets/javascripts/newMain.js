@@ -92,7 +92,7 @@ function get_midpoint(){
       });
 
       that.bind("calculationStarted", function(position){
-        $('#loading').text("Starting calculation");
+        $('#loading').text("Starting calculation " + (i+1) + " of " + coordinates_array.length + " (Searching for intersections within " + minutes + " minutes" + ")");
         $('#loading').fadeIn(1000);
         // $('#calc-map').fadeIn(3000);
       });
