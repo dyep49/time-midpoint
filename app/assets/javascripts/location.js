@@ -55,6 +55,7 @@ self.create = function(){
       }
     });
   };
+
   self.destroy = function(){
     $.ajax({
       url: "/locations/"+ this.id,
@@ -94,3 +95,30 @@ self.create = function(){
 
     app.db_locations.push(self);
 };
+
+
+
+//Favorite add Button
+
+
+$('.add-favorite').click(function(event){
+  var eventTarget = event.target
+  var valueInput = $(event.target).prev('input').val();
+  console.log(valueInput);
+  tag = window.prompt("Name your location");
+  var params = {
+    "tag": tag,
+    "address": valueInput
+  } 
+
+  $.ajax({
+    url: "/locations",
+    dataType:'json',
+    method: 'post',
+    data: params
+    })
+  
+  })
+
+
+

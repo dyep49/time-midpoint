@@ -1,5 +1,7 @@
 class Location < ActiveRecord::Base
   attr_accessible :lat, :long, :tag, :address
+
+  belongs_to :user
   
 # address comes from controller params which comes from js
   # before_save(:geocode)
