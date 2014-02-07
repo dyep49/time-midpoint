@@ -117,7 +117,7 @@ $('.add-favorite').click(function(event){
     method: 'post',
     data: params
     })
-  
+    
   })
 
 
