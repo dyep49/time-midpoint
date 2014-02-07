@@ -101,7 +101,7 @@ self.create = function(){
 //Favorite add Button
 //CREATE
 
-
+function clickFavorite(){
 $('.add-favorite').click(function(event){
   var eventTarget = event.target
   var valueInput = $(event.target).prev('input').val();
@@ -123,17 +123,11 @@ $('.add-favorite').click(function(event){
     })
     
   })
+};
 
 
 //SHOW
-// $(some button).click(function(event){
 function updateOption(){
-  $('select').change(function(event){
-    var input = $(this).prev().prev()
-    var value = $(this).val();
-    $(input).val(value);
-  });
-
   $.ajax({
     url: "/locations",
     dataType: 'json', 
@@ -146,4 +140,16 @@ function updateOption(){
   });
 }
 
+function setSelect(){
+  $('select').change(function(event){
+    console.log("set select working");
+    var input = $(this).prev().prev();
+    var value = $(this).val();
+    $(input).val(value);
+  });
+}
+
+clickFavorite();
 updateOption();
+setSelect();
+

@@ -159,15 +159,15 @@ function get_midpoint(){
 };
 
 function appendInput(){
-  var input = "<input class='location input form-control'>"
-  var inputs = $('.location');
-  var last_input = inputs.last();
-  $(input).insertAfter(".add-friend");
+  var div_clone = $('.location-div').last().clone()
   $('.add-friend').remove();
-  var new_last_input = $('.location').last();
-  $("<button class='add-friend'>Add</button>").insertAfter(new_last_input);
-  addAutocomplete(new_last_input);
-     $('.add-friend').click(function(){
+  var last_div = $('.location-div').last()
+  div_clone.insertAfter(last_div);
+  var last_input = $('.location').last();
+  addAutocomplete(last_input);
+  setSelect();
+  clickFavorite();
+  $('.add-friend').click(function(){
     appendInput();
   })
 }
