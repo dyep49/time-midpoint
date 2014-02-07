@@ -29,6 +29,8 @@ var YelpView = function(model){
     
     ];
 
+   
+
     $('.text-button').click(function(){
       var phone = window.prompt("Enter Phone Number");
       var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
@@ -72,6 +74,13 @@ var api = {
 }
 };
 
+
+    // $('.text-button').click(function(){
+    //   var phone = window.prompt("Enter Phone Number");
+    //   var t = new api.TMessage(phone, "Meet me at " + yelp_sms_name + ". " + yelp_sms_address);
+    //   console.log(phone);
+    //   t.tmessage();
+    // })
 
 
  // 
