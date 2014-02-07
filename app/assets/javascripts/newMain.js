@@ -101,12 +101,14 @@ function get_midpoint(){
           that.getOption("estimatedMaxCalculateCalls") * 100;
           if (percent < 100) {
             $('#loading').text("Calculating: "+percent+"%");
+            $('.progress-bar').css('width', percent + '%');
           } else {
             $('#loading').text("Almost Done");
           }
       });
 
       that.bind("calculationDone", function(position){
+        $('.progress-bar').css('width', '100%');
         $('#loading').text("Calculation Done!");
         console.log("calc finished");
         mapnificent.trigger('redraw');
