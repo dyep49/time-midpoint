@@ -42,6 +42,8 @@ var YelpView = function(model){
     self.$element = $( self.template() );
     var tbody = $('table').find('tbody')
     tbody.append(self.$element);
+    $('#results_map').fadeIn(3000);
+    $('table').fadeIn("slow");
   }
 };
 
