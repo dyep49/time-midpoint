@@ -92,6 +92,8 @@ function get_midpoint(){
 
       that.bind("calculationStarted", function(position){
         $('#loading').text("Starting calculation");
+        $('#loading').fadeIn(1000);
+        $('#calc-map').fadeIn(3000);
       });
 
       that.bind("calculationUpdated", function(position){
@@ -128,6 +130,7 @@ function get_midpoint(){
             mapnificent.destroy();
              $('#map').remove();
              $('iframe').remove();
+             $('#loading').remove();
             YELP(coordinate_string, activity)();
             $('#results_map').fadeIn("slow");
           };
@@ -198,10 +201,6 @@ function addAutocomplete(location){
       
 
       //We need to see how to show it without lagging
-
-      setTimeout(function() {
-      $('#calc-map').slideDown();
-      }, 5000);
       
     })
     console.log(coordinates_array);
