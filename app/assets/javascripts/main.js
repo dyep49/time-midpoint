@@ -60,6 +60,7 @@ YELP = function(ll, category) {
                 
                 
                 data.businesses.forEach(function(business) {
+
                     // we do this because the yelp id is not the id we want to use
                     // in the Location constructor
                     delete business["id"];
@@ -67,7 +68,7 @@ YELP = function(ll, category) {
                     var yelp_model = new YelpLocation(business);
                     var yelp_view = new YelpView(yelp_model);
                     yelp_view.render();
-
+                    yelp_view.clickSms();
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();

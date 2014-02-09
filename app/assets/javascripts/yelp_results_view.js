@@ -1,3 +1,4 @@
+z = 1
 var YelpView = function(model){
   var self = this;
   this.model = model;
@@ -21,7 +22,7 @@ var YelpView = function(model){
       "</br>",
       model.snippet_text,
       "</br>",
-      "<button class='text-button'>",
+      "<button class='text-button' id = 'sms" + z + "'>",
       "Send Info via SMS",
       "</button>",
       "</td>",
@@ -29,23 +30,29 @@ var YelpView = function(model){
     
     ];
 
-   
 
-    $('.text-button').click(function(){
-      var phone = window.prompt("Enter Phone Number");
-      var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
-      console.log(phone);
-      t.tmessage();
-    })
+    
     
     return html_array.join("");
   }
+
   this.render = function(){
+    z+=1; 
     self.$element = $( self.template() );
     var tbody = $('table').find('tbody')
     tbody.append(self.$element);
     $('#results_map').fadeIn(3000);
     $('table').fadeIn("slow");
+  }
+
+  this.clickSms = function(){
+    $('#sms' + z).click(function(){
+      alert('button working');
+      var phone = window.prompt("Enter Phone Number");
+      var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
+      console.log(phone);
+      t.tmessage();
+    })
   }
 };
 
@@ -75,6 +82,8 @@ var api = {
   } 
 }
 };
+
+
 
 
     // $('.text-button').click(function(){
