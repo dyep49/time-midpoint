@@ -68,7 +68,11 @@ YELP = function(ll, category) {
                     var yelp_model = new YelpLocation(business);
                     var yelp_view = new YelpView(yelp_model);
                     yelp_view.render();
-                    yelp_view.clickSms();
+                    if (z === 6)
+                      {
+                        $('#accordion').accordion();
+                      };
+                    // yelp_view.clickSms();
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();
@@ -116,6 +120,8 @@ var Map = function(ll) {
             disableDefaultUI: true
         };
         google_map = new google.maps.Map(document.getElementById("results_map"), mapOptions);
+
+        
         // app.elements.$results_map_div.css("height", "500px");
         // app.elements.$results_map_div.css("width", "500px");
 

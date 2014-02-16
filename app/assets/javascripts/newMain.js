@@ -92,7 +92,9 @@ function get_midpoint(){
       });
 
       that.bind("calculationStarted", function(position){
-        $('#loading').text("Starting calculation " + (i+1) + " of " + coordinates_array.length + " (Searching for intersections within " + minutes + " minutes" + ")");
+        // $('#loading').text("Starting calculation " + (i+1) + " of " + coordinates_array.length + " (Searching for intersections within " + minutes + " minutes" + ")");
+        $('#loading').text("Starting calculation (Searching for intersections within " + minutes + " minutes" + ")");
+
         $('#loading').fadeIn(1000);
         // $('#calc-map').fadeIn(3000);
       });
@@ -109,6 +111,7 @@ function get_midpoint(){
       });
 
       that.bind("calculationDone", function(position){
+        i += 1;
         $('.progress-bar').css('width', '100%');
         $('#loading').text("Calculation Done!");
         console.log("calc finished");
@@ -118,7 +121,6 @@ function get_midpoint(){
 
       var getBlobs = function(){
         var blobs = that.search.detectBlobs();
-        i += 1;
         coordinates.push(blobs);
         if (i === Object.keys(coordinates_array).length) {
           get_coordinates();
@@ -226,6 +228,9 @@ $(document).ready(function(){
    $('.add-friend').click(function(){
     appendInput();
   })
+
+
+
 
 
 });
