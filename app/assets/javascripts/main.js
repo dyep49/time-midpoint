@@ -70,7 +70,7 @@ YELP = function(ll, category) {
                     yelp_view.render();
                     if (z === 6)
                       {
-                        $('#accordion').accordion();
+                        $('#accordion').accordion({ heightStyle: "content" });
                       };
                     yelp_view.clickSms();
                 });
