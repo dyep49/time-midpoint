@@ -72,7 +72,7 @@ YELP = function(ll, category) {
                       {
                         $('#accordion').accordion();
                       };
-                    // yelp_view.clickSms();
+                    yelp_view.clickSms();
                 });
                 // KILL THE MAGNIFICENT MAP
                 //$("#mapnificent-map").remove();

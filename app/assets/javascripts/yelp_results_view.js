@@ -33,7 +33,20 @@ var YelpView = function(model){
   var html_array = [
     "<h2><a href='"+ model.mobile_url + "'>" + model.name + "</a></h2>",
     "<div>",
-    "<p>" + model.snippet_text + "</p>",
+    "<img src='" + model.image_url +"'>",  
+    "</br>",
+    "<img src='" + model.rating_img +"'>",
+    model.review_count,
+    "</br>",
+    model.address,
+    "</br>",
+    model.phone,
+    "</br>",
+    model.snippet_text,
+    "</br>",
+    "<button class='text-button' id = 'sms" + z + "'>",
+    "Send Info via SMS",
+    "</button>",
     "</div>",
   ];
 
@@ -62,14 +75,14 @@ var YelpView = function(model){
     $('#accordion').fadeIn("slow");
   }
 
-  // this.clickSms = function(){
-  //   $('#sms' + z).click(function(){
-  //     var phone = window.prompt("Enter Phone Number");
-  //     var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
-  //     console.log(phone);
-  //     t.tmessage();
-  //   })
-  // }
+  this.clickSms = function(){
+    $('#sms' + z).click(function(){
+      var phone = window.prompt("Enter Phone Number");
+      var t = new api.TMessage(phone, "Meet me at " + model.name + ". " + model.address);
+      console.log(phone);
+      t.tmessage();
+    })
+  }
 };
 
 var api = {
