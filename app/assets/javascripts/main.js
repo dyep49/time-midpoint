@@ -163,7 +163,7 @@ var Map = function(ll) {
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
                 animation: google.maps.Animation.DROP,
-                icon: 'https://www.google.com/mapfiles/marker.png'
+                // icon: 'https://www.google.com/mapfiles/marker.png'
             });
 
             var marker_number = app.markers.length
@@ -173,11 +173,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 0);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
@@ -187,11 +187,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 0);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
@@ -201,11 +201,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 1);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
@@ -215,11 +215,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 2);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
@@ -229,11 +229,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 3);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
@@ -243,11 +243,11 @@ var Map = function(ll) {
                 google.maps.event.addListener(new_marker, 'click', function(){
                     $('#accordion').accordion('option', 'active', 4);
 
-                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    } else {
-                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    }
+                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    // } else {
+                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    // }
                     
                 })
             }
