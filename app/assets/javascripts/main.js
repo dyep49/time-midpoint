@@ -10,7 +10,12 @@ var getCategory = function() {
 // this closure takes two parameters
 // parameter1 = ll = "<latitude>,<longitude>"
 // parameter2 = category = "<category>"
+
+
+    var marker_counter = 0
+
 YELP = function(ll, category) {
+
     var auth = {
         consumerKey: "Jdy8fp6RC-3uO9eeh1K6IA",
         consumerSecret: "jfO1O9GH0eMamjUhZZa9byq82ho",
@@ -157,8 +162,97 @@ var Map = function(ll) {
             var new_marker = new google.maps.Marker({
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                icon: 'https://www.google.com/mapfiles/marker.png'
             });
+
+            var marker_number = app.markers.length
+
+            if (marker_number === 0) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 0);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            if (marker_number === 0) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 0);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            if (marker_number === 1) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 1);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            if (marker_number === 2) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 2);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            if (marker_number === 3) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 3);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            if (marker_number === 4) {
+
+                google.maps.event.addListener(new_marker, 'click', function(){
+                    $('#accordion').accordion('option', 'active', 4);
+
+                    if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
+                    } else {
+                        new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+                    }
+                    
+                })
+            }
+
+            // marker_counter += 1;            
             // var street_address_pattern = new RegExp(/ (.+)\(/ );
             //  var street_address = app.locations[iterator].address.match( street_address_pattern )[1];
 
@@ -263,6 +357,7 @@ var app = app || {
     }
 };
 
-$(function() {
+$(function() {   
     app.initialize();
+
 });
