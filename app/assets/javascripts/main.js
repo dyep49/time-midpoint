@@ -163,7 +163,7 @@ var Map = function(ll) {
                 position: new google.maps.LatLng( latitude, longitude ),
                 map: google_map,
                 animation: google.maps.Animation.DROP,
-                // icon: 'https://www.google.com/mapfiles/marker.png'
+                icon: 'https://www.google.com/mapfiles/marker.png'
             });
 
             // marker_counter += 1;            
@@ -214,7 +214,11 @@ var Map = function(ll) {
             if (iterator === 5) {
               $.each(app.markers, function(index, marker){
                 google.maps.event.addListener(marker, 'click', function(){
+                  $.each(app.markers, function(i, marker){
+                     marker.setIcon('http://maps.google.com/mapfiles/marker.png')
+                  })
                   $('#accordion').accordion('option', 'active', index);
+                  marker.setIcon('http://maps.google.com/mapfiles/marker_green.png')
                 })
               });
             }

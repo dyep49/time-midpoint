@@ -73,6 +73,19 @@ var YelpView = function(model){
     $('#accordion').append(self.$element);
     $('#results_map').fadeIn(3000);
     $('#accordion').fadeIn("slow");
+
+    if (z === 6) {
+      var headers = $('#accordion h2')
+
+      $.each(headers, function(index, header){
+        $(header).click(function(){
+          $.each(app.markers, function(i, marker){
+            marker.setIcon('http://maps.google.com/mapfiles/marker.png')
+          })
+          app.markers[index].setIcon('http://maps.google.com/mapfiles/marker_green.png')
+        })
+      })
+    }
   }
 
   this.clickSms = function(){
@@ -124,7 +137,6 @@ var api = {
 
 
  // 
-
 
 
 
