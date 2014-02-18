@@ -166,92 +166,6 @@ var Map = function(ll) {
                 // icon: 'https://www.google.com/mapfiles/marker.png'
             });
 
-            var marker_number = app.markers.length
-
-            if (marker_number === 0) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 0);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
-            if (marker_number === 0) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 0);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
-            if (marker_number === 1) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 1);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
-            if (marker_number === 2) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 2);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
-            if (marker_number === 3) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 3);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
-            if (marker_number === 4) {
-
-                google.maps.event.addListener(new_marker, 'click', function(){
-                    $('#accordion').accordion('option', 'active', 4);
-
-                    // if (new_marker.icon === 'https://www.google.com/mapfiles/marker_green.png'){
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker.png');   
-                    // } else {
-                    //     new_marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-                    // }
-                    
-                })
-            }
-
             // marker_counter += 1;            
             // var street_address_pattern = new RegExp(/ (.+)\(/ );
             //  var street_address = app.locations[iterator].address.match( street_address_pattern )[1];
@@ -296,6 +210,14 @@ var Map = function(ll) {
             new_marker.custom_infowindow_text = content_string.join("");
             app.markers.push( new_marker );
             iterator++;
+
+            if (iterator === 5) {
+              $.each(app.markers, function(index, marker){
+                google.maps.event.addListener(marker, 'click', function(){
+                  $('#accordion').accordion('option', 'active', index);
+                })
+              });
+            }
         }
 
         for ( var i = 0; i < app.locations.length; i++ ) {
