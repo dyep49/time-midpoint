@@ -191,11 +191,11 @@ function My_Location(latitude, longitude){
     
 function addAutocomplete(location){
   $(location).geocomplete().bind("geocode:result", function(event, result){
-    var latitude = result.geometry.location.d;
-    var longitude = result.geometry.location.e;
+    var latitude = result.geometry.location.k;
+    var longitude = result.geometry.location.A;
     $('#search-midpoint').click(function(){
       var inputDiv = $('.input-container').children();
-      coordinates_array.push(new My_Location(result.geometry.location.d, result.geometry.location.e));
+      coordinates_array.push(new My_Location(result.geometry.location.k, result.geometry.location.A));
       activity = $('.activity').val();
       find_max_distance();
       initialize();
